@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUTH METER // QUANTUM BIOMETRIC ANALYZER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <audio id="snd-click" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav" preload="auto"></audio>
+    <audio id="snd-alarm" src="https://assets.mixkit.co/active_storage/sfx/999/999-84.wav" loop preload="auto"></audio>
+
+    <div id="prank-overlay">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <div class="prank-title">CRITICAL DECEPTION DETECTED</div>
+        <p>SUBJECT MALICIOUS MANIPULATION OVERRIDE ACTIVATED</p>
+    </div>
+
+    <section id="landing-screen" class="screen">
+        <div class="radar-container">
+            <div class="radar-sweep"></div>
+        </div>
+        <h1 class="glitch-title">TRUTH METER v5.0</h1>
+        <div class="subtitle">QUANTUM BIOMETRIC INTERROGATION INTERFACE</div>
+        <button class="cyber-btn" id="start-btn">INITIALIZE CORE STACK</button>
+        <div class="disclaimer">
+            <i class="fa-solid fa-circle-info"></i> NOTICE: This system executes fully synthesized mathematical tracking simulations for parity entertainment metrics. It holds no calibrated law enforcement capacities.
+        </div>
+    </section>
+
+    <section id="dashboard-screen" class="screen hidden">
+        <header class="hud-panel">
+            <div class="brand">
+                <i class="fa-solid fa-brain"></i> AI INTEGRATED BIOMETRIC MONITOR
+            </div>
+            <div class="controls">
+                <button class="util-btn" id="btn-fullscreen"><i class="fa-solid fa-expand"></i> FULLSCREEN</button>
+                <button class="util-btn" id="btn-recalibrate"><i class="fa-solid fa-rotate-left"></i> RE-CALIBRATE</button>
+            </div>
+            <div class="system-status">
+                <div class="blink-dot"></div>
+                <span id="status-text">ANALYZER ONLINE</span>
+            </div>
+        </header>
+
+        <main class="workspace">
+            <div class="hud-panel video-panel">
+                <div class="scanner-line"></div>
+                <video id="webcam" autoplay playsinline muted></video>
+                <canvas id="face-overlay"></canvas>
+            </div>
+
+            <div class="hud-panel analytics-panel">
+                <div class="panel-title"><i class="fa-solid fa-chart-bar"></i> MICRO-EXPRESSION ENGINE</div>
+                <div id="emotion-metrics-container">
+                    <div class="metric-row"><div class="metric-label"><span>NEUTRAL</span><span id="val-neutral">0%</span></div><div class="metric-bar-container"><div id="bar-neutral" class="metric-bar-fill"></div></div></div>
+                    <div class="metric-row"><div class="metric-label"><span>SINCERE</span><span id="val-happy">0%</span></div><div class="metric-bar-container"><div id="bar-happy" class="metric-bar-fill"></div></div></div>
+                    <div class="metric-row"><div class="metric-label"><span>STRESSED</span><span id="val-angry">0%</span></div><div class="metric-bar-container"><div id="bar-angry" class="metric-bar-fill text-danger"></div></div></div>
+                    <div class="metric-row"><div class="metric-label"><span>EVASIVE</span><span id="val-fear">0%</span></div><div class="metric-bar-container"><div id="bar-fear" class="metric-bar-fill text-danger"></div></div></div>
+                    <div class="metric-row"><div class="metric-label"><span>UNEXPECTED</span><span id="val-surprise">0%</span></div><div class="metric-bar-container"><div id="bar-surprise" class="metric-bar-fill"></div></div></div>
+                </div>
+                <div class="footer-note"><i class="fa-solid fa-fingerprint"></i> Processing 68 structural telemetry anchors.</div>
+            </div>
+        </main>
+
+        <aside class="hud-panel scoring-panel">
+            <div>
+                <div class="panel-title"><i class="fa-solid fa-gauge-high"></i> CORE PROBABILITY MATCH</div>
+                <div class="score-display">
+                    <div class="score-value" id="truth-rating">100%</div>
+                    <div class="score-label">TRUTH PROBABILITY</div>
+                </div>
+            </div>
+            <div>
+                <div class="metric-row">
+                    <div class="metric-label"><span>AI CONFIDENCE</span><span id="val-confidence">94%</span></div>
+                    <div class="metric-bar-container"><div id="bar-confidence" class="metric-bar-fill" style="width: 94%;"></div></div>
+                </div>
+            </div>
+            <div>
+                <div class="panel-title"><i class="fa-solid fa-terminal"></i> AI DIAGNOSTIC CONCLUSIONS</div>
+                <div class="diagnostic-box" id="ai-conclusion">INITIALIZING TELEMETRY STREAM READINGS...</div>
+            </div>
+        </aside>
+
+        <footer class="audio-panel">
+            <div class="hud-panel wave-container">
+                <div class="panel-title"><i class="fa-solid fa-wave-square"></i> AUDIO FREQUENCY SPECTROGRAM</div>
+                <div class="canvas-wrapper"><canvas id="waveform-canvas"></canvas></div>
+            </div>
+            <div class="hud-panel chart-container">
+                <div class="panel-title"><i class="fa-solid fa-chart-line"></i> VOCAL PITCH FLUCTUATION (STRESS)</div>
+                <div class="canvas-wrapper"><canvas id="pitch-chart"></canvas></div>
+            </div>
+        </footer>
+    </section>
+
+    <script src="js/truthEngine.js"></script>
+    <script src="js/audioEngine.js"></script>
+    <script src="js/faceEngine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

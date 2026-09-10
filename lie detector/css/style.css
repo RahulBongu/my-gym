@@ -1,0 +1,131 @@
+:root {
+    --bg: #030712;
+    --panel-bg: rgba(17, 24, 39, 0.7);
+    --cyan: #00f0ff;
+    --magenta: #ff0055;
+    --green: #00ff66;
+    --text: #e5e7eb;
+    --border: rgba(0, 240, 255, 0.2);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* CRT Scanline Glitch Filter Overlay */
+body::before {
+    content: " ";
+    display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+    z-index: 99999; background-size: 100% 4px, 6px 100%; pointer-events: none;
+}
+
+.hud-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.05);
+    position: relative; overflow: hidden;
+}
+
+.hud-panel::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+
+.screen {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; transition: all 0.5s ease;
+}
+
+.hidden { display: none !important; opacity: 0; }
+
+/* Landing View Styles */
+#landing-screen { justify-content: center; align-items: center; background: radial-gradient(circle, rgba(17,24,39,0.8) 0%, rgba(3,7,18,1) 100%); }
+.glitch-title { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 900; text-shadow: 0 0 15px var(--cyan); margin-bottom: 5px; }
+.subtitle { color: var(--cyan); letter-spacing: 5px; margin-bottom: 40px; font-size: 1rem; }
+.radar-container { width: 180px; height: 180px; border-radius: 50%; border: 2px solid var(--cyan); position: relative; margin-bottom: 40px; }
+.radar-sweep { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(from 0deg, rgba(0,240,255,0.4) 0%, transparent 45%); animation: sweep 2.5s linear infinite; }
+@keyframes sweep { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.cyber-btn {
+    font-family: 'Orbitron', sans-serif; background: transparent; color: var(--cyan); border: 2px solid var(--cyan);
+    padding: 15px 45px; font-size: 1.1rem; font-weight: bold; cursor: pointer; letter-spacing: 2px; box-shadow: 0 0 15px rgba(0,240,255,0.2); transition: all 0.3s;
+}
+.cyber-btn:hover { background: var(--cyan); color: #000; box-shadow: 0 0 30px var(--cyan); }
+.disclaimer { margin-top: 35px; font-size: 0.75rem; color: rgba(255,255,255,0.3); max-width: 450px; text-align: center; }
+
+/* Dashboard HUD Matrix Grid Layout */
+#dashboard-screen {
+    display: grid; padding: 15px; gap: 15px;
+    grid-template-columns: 1fr 340px;
+    grid-template-rows: 60px 1fr 220px;
+}
+
+header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+.system-status { display: flex; align-items: center; gap: 10px; color: var(--green); }
+.blink-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: blink 1s infinite alternate; }
+@keyframes blink { from { opacity: 0.2; } to { opacity: 1; } }
+
+.workspace { grid-column: 1 / 2; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.video-panel { position: relative; background: #000; display: flex; }
+#webcam, #face-overlay { position: absolute; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+#face-overlay { z-index: 2; }
+
+.scanner-line {
+    position: absolute; width: 100%; height: 4px; background: var(--cyan);
+    box-shadow: 0 0 15px var(--cyan); top: 0; z-index: 3; animation: scan 4s linear infinite;
+}
+@keyframes scan { 0% { top: 0%; } 50% { top: 100%; } 100% { top: 0%; } }
+
+.analytics-panel { padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
+.panel-title { font-family: 'Orbitron'; font-size: 0.85rem; color: var(--cyan); border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 15px; }
+
+/* Custom Biometric Metric Progress Bars */
+.metric-row { margin-bottom: 12px; }
+.metric-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px; }
+.metric-bar-container { width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+.metric-bar-fill { height: 100%; width: 0%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); transition: width 0.15s ease-out; }
+.metric-bar-fill.text-danger { background: var(--magenta); box-shadow: 0 0 8px var(--magenta); }
+.footer-note { font-size: 0.75rem; color: rgba(255,255,255,0.3); border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 10px; }
+
+/* Sidebar Scoring Deck */
+.scoring-panel { grid-column: 2 / 3; grid-row: 2 / 4; display: flex; flex-direction: column; padding: 20px; justify-content: space-between; }
+.score-display { text-align: center; margin: 25px 0; }
+.score-value { font-family: 'Orbitron'; font-size: 4rem; font-weight: 900; color: var(--cyan); text-shadow: 0 0 25px rgba(0,240,255,0.4); }
+.score-label { font-size: 0.85rem; letter-spacing: 2px; color: rgba(255,255,255,0.5); margin-top: 5px; }
+.diagnostic-box { border: 1px dashed var(--cyan); padding: 15px; background: rgba(0,240,255,0.03); min-height: 80px; font-size: 1rem; line-height: 1.4; display: flex; align-items: center; }
+
+/* Bottom Audio Engineering Bar */
+.audio-panel { grid-column: 1 / 2; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.audio-panel .hud-panel { padding: 12px; display: flex; flex-direction: column; }
+.canvas-wrapper { flex-grow: 1; position: relative; width: 100%; height: 100%; }
+.canvas-wrapper canvas { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+
+/* Utilities */
+.controls { display: flex; gap: 10px; }
+.util-btn { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text); padding: 6px 14px; cursor: pointer; font-family: 'Share Tech Mono'; font-size: 0.8rem; }
+.util-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* Prank Overlay Modals */
+#prank-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(200, 0, 60, 0.98);
+    z-index: 100000; display: none; flex-direction: column; justify-content: center; align-items: center;
+    animation: alertBlink 0.4s infinite alternate; box-shadow: inset 0 0 100px #000;
+}
+#prank-overlay i { font-size: 5rem; margin-bottom: 20px; color: #fff; }
+.prank-title { font-family: 'Orbitron'; font-size: 4rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 15px; text-shadow: 0 0 20px #000; text-align: center; }
+@keyframes alertBlink { from { background: rgba(140, 0, 40, 0.98); } to { background: rgba(230, 0, 60, 1); } }
+.shake { animation: structuralShake 0.1s infinite; }
+@keyframes structuralShake {
+    0% { transform: translate(1px, 2px) rotate(0deg); }
+    50% { transform: translate(-2px, -1px) rotate(-1deg); }
+    100% { transform: translate(2px, 1px) rotate(1deg); }
+}
