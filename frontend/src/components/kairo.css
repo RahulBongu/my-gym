@@ -1,0 +1,156 @@
+/* Kairo Mascot Motion & Styling */
+@keyframes kairo-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes kairo-pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes kairo-ear-twitch {
+  0%, 90%, 100% {
+    transform: rotate(0deg);
+  }
+  93% {
+    transform: rotate(-3deg);
+  }
+  96% {
+    transform: rotate(2deg);
+  }
+}
+
+.kairo-animated {
+  animation: kairo-float 3.6s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.kairo-glow {
+  animation: kairo-pulse-glow 3s ease-in-out infinite;
+}
+
+.kairo-ears {
+  animation: kairo-ear-twitch 6s ease-in-out infinite;
+  transform-origin: center 40px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kairo-animated,
+  .kairo-glow,
+  .kairo-ears {
+    animation: none !important;
+  }
+}
+
+.kairo-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.kairo-bubble {
+  background: var(--surface-2, #202922);
+  border: 1px solid var(--border-card, #2e3b31);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: var(--label, #f3f6f0);
+  font-size: 0.875rem;
+  line-height: 1.35;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  position: relative;
+  max-width: 280px;
+}
+
+.kairo-bubble::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 18px;
+  width: 10px;
+  height: 10px;
+  background: var(--surface-2, #202922);
+  border-left: 1px solid var(--border-card, #2e3b31);
+  border-bottom: 1px solid var(--border-card, #2e3b31);
+  transform: rotate(45deg);
+}
+
+.kairo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--acc, #c7f36b);
+  margin-bottom: 4px;
+}
+
+.kairo-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--acc, #c7f36b);
+}
+
+/* Home Companion Card */
+.kairo-home-card {
+  background: var(--surface);
+  border: 1px solid var(--border-card, #232b25);
+  border-radius: var(--r-card, 14px);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.kairo-home-card::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, var(--acc-soft, rgba(199,243,107,0.12)) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.kairo-home-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.kairo-home-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--acc-ink, #c7f36b);
+  margin-bottom: 3px;
+}
+
+.kairo-home-msg {
+  font-size: var(--fs-subhead, 0.9375rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--label);
+}
