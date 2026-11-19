@@ -29,8 +29,8 @@
   --border-card: #232B25;
 
   /* text */
-  --label:     #F3F6F0;
-  --label-2:   #A5B0A6;
+  --label:     #ffffff;
+  --label-2:   rgba(235,235,245,.60);
   --label-3:   rgba(235,235,245,.32);
   --label-4:   rgba(235,235,245,.18);
   --label-dim: rgba(235,235,245,.55);   /* .50 was 4.1:1 on a dialog's #2c2c2e; .55 is 4.7:1 there */
@@ -119,14 +119,14 @@
   --raised-line: rgba(60,60,67,.10);
   --border-card: #DCE3D9;
 
-  --label:     #1A241C;
-  --label-2:   #59665C;
-  --label-3:   rgba(26,36,28,.45);
-  --label-4:   rgba(26,36,28,.20);
+  --label:     #000000;
+  --label-2:   rgba(60,60,67,.75);
+  --label-3:   rgba(60,60,67,.30);
+  --label-4:   rgba(60,60,67,.16);
   --label-dim: var(--label-2);
 
-  --sep:       rgba(26,36,28,.14);
-  --sep-op:    rgba(26,36,28,.10);
+  --sep:       rgba(60,60,67,.29);
+  --sep-op:    rgba(60,60,67,.20);
 
   --blue:#007aff; --green:#34c759; --red:#ff3b30; --orange:#ff9500;
   --yellow:#ffcc00; --teal:#30b0c7; --indigo:#5856d6; --pink:#ff2d55;
