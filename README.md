@@ -1,449 +1,176 @@
-# 🕵️ Lie Detector
+# My Gym — Premium Self-Hosted Fitness Companion
 
-> **An experimental AI and computer-vision project exploring behavioral cues associated with deception.**
+<div align="center">
 
-**Lie Detector** is an experimental computer-vision application that explores whether observable facial and behavioral signals can be analyzed to identify patterns that may be associated with deceptive behavior.
+<p>
+  <img src="assets/readme/hero-dark.png" alt="My Gym: The self-hosted gym tracker you own" width="100%">
+</p>
 
-The project uses real-time visual analysis to study signals such as facial movement, eye behavior, expressions, and other observable cues.
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-a3e635.svg?style=flat-square&labelColor=0c0e12&color=a3e635)](LICENSE)
+[![Based on: openGym v1.4.5](https://img.shields.io/badge/Upstream-openGym%20v1.4.5-C7F36B?style=flat-square&labelColor=0c0e12)](https://github.com/DuarteSantos8/openGym)
+[![Design: Google Stitch](https://img.shields.io/badge/Design-Google%20Stitch%20MCP-F59E0B?style=flat-square&labelColor=0c0e12)](docs/design-system.md)
+[![Companion: Kairo](https://img.shields.io/badge/Companion-Kairo%20Vector-22D3EE?style=flat-square&labelColor=0c0e12)](#meet-kairo--your-workout-companion)
 
-> ⚠️ **Important:** This project is experimental. Behavioral and facial cues cannot reliably determine whether a person is telling the truth or lying. The system should be treated as a research/learning project, not as a scientifically validated lie detector.
+**My Gym** is a privacy-first, fully-featured fitness tracking and workout planning application designed to run on your own infrastructure. Built upon the robust foundation of [openGym](https://github.com/DuarteSantos8/openGym) (v1.4.5) by Duarte Santos, My Gym features an upgraded design system crafted via **Google Stitch MCP** and introduces **Kairo**, an original reactive SVG workout companion.
 
----
+[Design System](docs/design-system.md) · [Design Research](docs/design-research.md) · [Licensing & Attribution](docs/licensing-and-attribution.md) · [Self-Hosting Guide](docs/SELF_HOSTING.md)
 
-## 🧠 The Idea
-
-Human communication contains many observable signals.
-
-When someone speaks, their:
-
-* 👁️ Eye movement can change
-* 😐 Facial expressions can change
-* 👄 Lip movement can change
-* 🙂 Emotional expressions can vary
-* 🧍 Body position can shift
-* ⏱️ Timing and movement patterns can change
-
-This project explores whether computer vision can capture and analyze some of these changes.
-
-```text
-                🎥 Camera
-                    │
-                    ▼
-          ┌──────────────────┐
-          │  Video Capture   │
-          └────────┬─────────┘
-                   │
-                   ▼
-          ┌──────────────────┐
-          │ Face Detection   │
-          └────────┬─────────┘
-                   │
-                   ▼
-          ┌──────────────────┐
-          │ Facial Features  │
-          └────────┬─────────┘
-                   │
-                   ▼
-          ┌──────────────────┐
-          │ Behavior Analysis│
-          └────────┬─────────┘
-                   │
-                   ▼
-          📊 Observed Signals
-```
+</div>
 
 ---
 
-# ✨ Features
+## Highlights
 
-## 👁️ Facial Analysis
-
-Analyze observable facial behavior from video input.
-
-Potential signals include:
-
-* Facial movement
-* Eye behavior
-* Blink patterns
-* Gaze direction
-* Lip movement
-* Facial expressions
-* Changes from a person's baseline
+- **Your Data, Your Machine**: Self-hosted backend with durable local storage. No tracking, no mandatory subscriptions, no third-party telemetry, no cloud lock-in.
+- **Google Stitch Redesign**: Obsidian dark aesthetic (`#0D110F`), high-contrast Acid Lime accents (`#C7F36B`), warm amber badges, and crisp typography (`Plus Jakarta Sans` headings paired with `Inter` body text).
+- **Meet Kairo**: An original reactive mascot built in pure lightweight vector SVG. Kairo guides you through empty states, celebrates new Personal Records with confetti bursts, holds a stopwatch during rest timers, and cheers your weekly consistency.
+- **Offline-First & Fast**: Service-worker powered PWA, instantaneous local state caching via Zustand, and seamless WebAuthn passkey authentication.
+- **5,600+ Exercise Catalogue**: Comprehensive library with demonstration media, muscle targeting maps, equipment filters, and custom exercise creation.
+- **Ergonomic Active Workout Mode**: Thumb-friendly set completion, plate calculator for standard and specialty bars, automated rest timers, RPE/RIR tracking, and live volume progression.
 
 ---
 
-## 🎥 Real-Time Video Processing
+## Meet Kairo — Your Workout Companion
 
-The system is designed around video input, allowing facial information to be processed continuously rather than analyzing only a single image.
+My Gym features **Kairo**, a friendly original mascot dressed in a tech fitness jacket with Acid Lime trim. Kairo reacts dynamically to your training flow:
 
-```text
-Camera
-  ↓
-Frame
-  ↓
-Face Detection
-  ↓
-Landmarks
-  ↓
-Feature Extraction
-  ↓
-Analysis
-```
+| Pose | Context & Behavior |
+| :--- | :--- |
+| **`welcome`** | Greets you on the Home dashboard with session status and motivational insights |
+| **`celebrate`** | Bursts out with celebratory confetti when you smash a new Personal Record |
+| **`trophy`** | Appears on workout completion summaries with gold championship hardware |
+| **`timer`** | Accompanies active rest timers with an amber stopwatch |
+| **`focus`** | Keeps you dialed in during high-intensity set entries |
+| **`encourage`** | Offers tips in the Exercise Library and Routine editor |
+| **`empty`** | Guides you through empty states and starter plan onboarding |
+
+Kairo is rendered entirely in scalable SVG without external raster dependencies, ensuring crisp rendering at any DPI and zero network latency. Kairo fully respects `prefers-reduced-motion` settings.
 
 ---
 
-## 🧠 Computer Vision
+## Core Capabilities
 
-The project explores computer-vision techniques for extracting meaningful information from human faces.
+### 1. Planning & Routines
+- Multi-day weekly splits (Push/Pull/Legs, Upper/Lower, 5×5, Full Body) or sequential rotations (A/B/C/...).
+- Visual muscle targeting heatmap displaying active muscle strain before starting a routine.
+- Superset grouping, drop sets, warmup set tagging, rest-pause sets, and timed isometric holds.
+- Per-exercise rest intervals, target rep ranges, and planned deload cycles.
 
-This makes the project useful for experimenting with:
+### 2. Active Training
+- Automatic pre-fill of previous weights and rep counts for streamlined logging.
+- Plate math calculator with customizable gym inventories (barbells, plates, machine stacks).
+- Screen wake-lock keeps display active throughout your workout.
+- Swap unavailable machines instantly with planned backup exercises while preserving progression.
 
-* Face landmarks
-* Facial geometry
-* Motion analysis
-* Expression analysis
-* Temporal patterns
-* Behavioral signals
+### 3. Progression & Analytics
+- Multi-protocol progression rules: Linear, Greyskull LP, Double Progression, and Triple Progression.
+- Estimated 1RM calculations with historical trend curves.
+- Structural balance ratios (Poliquin, ATG, Thibaudeau).
+- Year-long workout activity heatmaps and recovery status visualizations.
 
----
-
-## 📊 Behavioral Signals
-
-Instead of simply returning a binary:
-
-```text
-TRUE / FALSE
-```
-
-the project can be viewed as an exploration of **observable behavioral changes**.
-
-For example:
-
-```text
-Baseline
-   │
-   ├── Eye movement
-   ├── Blink behavior
-   ├── Facial movement
-   ├── Expression
-   └── Other visual signals
-   │
-   ▼
-Compare over time
-   │
-   ▼
-Identify unusual changes
-```
+### 4. Privacy & Authentication
+- Passwordless WebAuthn / Passkey authentication.
+- Local JSON file storage with zero cloud dependencies.
+- Complete data export/import in JSON and CSV formats.
 
 ---
 
-# 🛠️ Technology
+## Quick Start with Docker
 
-The project focuses on the intersection of:
-
-| Technology          | Purpose                   |
-| ------------------- | ------------------------- |
-| 🧠 Machine Learning | Behavioral analysis       |
-| 👁️ Computer Vision | Facial feature analysis   |
-| 🎥 Video Processing | Real-time input           |
-| 📐 Feature Analysis | Detect behavioral changes |
-| 🐍 Python           | Core experimentation      |
-
-The repository contains the main implementation inside the `lie detector` project directory.
-
----
-
-# 🚀 Getting Started
-
-## 1. Clone the repository
+The fastest way to deploy My Gym is using Docker Compose:
 
 ```bash
-git clone https://github.com/RahulBongu/lie-detector.git
-cd lie-detector
+# Clone the repository
+git clone https://github.com/RahulBongu/my-gym.git
+cd my-gym
+
+# Start the stack
+docker compose up -d
 ```
 
-## 2. Enter the project
+Access the application in your browser at `http://localhost:3000`.
 
-Because the project is contained inside a directory named `lie detector`:
+To configure passkeys for a public domain or custom port, edit `.env`:
+```ini
+RP_ID=your-domain.com
+ORIGIN=https://your-domain.com
+PORT=3000
+DATA_DIR=/data
+```
+
+---
+
+## Local Development & Testing
+
+### Prerequisites
+- Node.js 20+ (LTS recommended)
+- npm 10+
+
+### Setup
 
 ```bash
-cd "lie detector"
+# 1. Install frontend dependencies
+npm --prefix frontend install
+
+# 2. Install API dependencies
+npm --prefix api install
+
+# 3. Start the API server (runs on :8080)
+npm --prefix api run dev
+
+# 4. In a separate terminal, start the Vite frontend (runs on :5173)
+npm --prefix frontend run dev
 ```
 
-## 3. Install dependencies
-
-Install the Python dependencies required by the project.
-
-If a `requirements.txt` file is present:
+### Running Tests
 
 ```bash
-pip install -r requirements.txt
-```
+# Frontend component and unit tests (Vitest)
+npm --prefix frontend test
 
-If the project does not contain a dependency file, install the required packages according to the imports used by the application.
+# API integration tests (Node.js native test runner)
+npm --prefix api test
 
----
-
-# ▶️ Running the Project
-
-Start the application's main Python entry point from the project directory.
-
-```bash
-python <entry-point>.py
-```
-
-The exact entry point depends on the current implementation in the repository.
-
----
-
-# 🧪 Example Workflow
-
-A typical analysis session can be represented as:
-
-```text
-┌─────────────────────┐
-│ Start Camera / Video│
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│ Detect Face         │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│ Extract Landmarks   │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│ Track Changes       │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│ Analyze Behavior    │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│ Display Results     │
-└─────────────────────┘
+# Production build check
+npm --prefix frontend run build
 ```
 
 ---
 
-# 🎯 Project Goals
+## Architecture & Design System
 
-The main goal is to experiment with the intersection of:
+My Gym follows a decoupled, lightweight client-server architecture:
 
-**Computer Vision + AI + Human Behavior**
-
-The project can serve as a foundation for exploring how machines can observe and interpret human behavior through video.
-
----
-
-# 🔬 Research Possibilities
-
-The project could be extended into a broader behavioral-analysis platform.
-
-### Facial Analysis
-
-* Micro-expression analysis
-* Facial Action Coding System features
-* Eye movement tracking
-* Blink detection
-* Gaze estimation
-* Head-pose estimation
-
-### Temporal Analysis
-
-Instead of analyzing individual frames, future versions could analyze behavior across time:
-
-```text
-Frame 1
-   ↓
-Frame 2
-   ↓
-Frame 3
-   ↓
-Frame 4
-   ↓
-   ...
-   ↓
-Temporal Pattern
+```
+my-gym/
+├── frontend/               # React 19 + Vite 8 Single Page App & PWA
+│   ├── src/
+│   │   ├── components/     # UI components & Kairo mascot
+│   │   ├── views/          # Home, Workout, Library, Stats, Settings
+│   │   ├── store/          # Zustand reactive state stores
+│   │   ├── lib/            # Business logic, math, formatters, WebAuthn
+│   │   └── index.css       # Obsidian & Acid Lime design tokens
+│   └── public/             # PWA manifests, icons, fonts
+├── api/                    # Node.js backend (node:http, zero heavy frameworks)
+│   ├── server.js           # Lightweight REST API and static server
+│   ├── lib/                # Passkey WebAuthn, session crypto, file store
+│   └── test/               # Node test runner test suites
+├── docs/                   # Architectural & design documentation
+│   ├── design-system.md    # Stitch MCP color tokens, typography & components
+│   ├── design-research.md  # Competitive analysis & interaction patterns
+│   └── licensing-and-attribution.md # Upstream openGym attribution & media notice
+└── docker-compose.yml      # Ready-to-run container configuration
 ```
 
-This could potentially provide more meaningful information than analyzing isolated frames.
+For full details on colors, spacing, typography, and Stitch MCP design tokens, see [docs/design-system.md](docs/design-system.md).
 
 ---
 
-# 🤖 Future Improvements
+## Attribution & Licensing
 
-## Version 2
+- **Core Application**: Derived from [openGym](https://github.com/DuarteSantos8/openGym) (v1.4.5, commit `2d70e026effc6602f513555166a97443520f0572`), created by Duarte Santos and openGym contributors.
+- **License**: [GNU Affero General Public License v3.0 (AGPL-3.0)](LICENSE).
+- **Exercise Media**: Exercise illustrations and video demonstrations are provided under their respective open and free fitness media licenses. They are distributed with the application in accordance with non-commercial attribution guidelines.
+- **Original Contributions**: The "My Gym" brand identity, Google Stitch MCP design token integration, and Kairo vector mascot are original works released under AGPL-3.0.
 
-* [ ] Improved face tracking
-* [ ] Better calibration
-* [ ] Real-time confidence visualization
-* [ ] Behavioral timeline
-* [ ] Session recording
-* [ ] Better UI
-
-## Version 3
-
-* [ ] Micro-expression analysis
-* [ ] Head-pose tracking
-* [ ] Eye-gaze analysis
-* [ ] Temporal models
-* [ ] Personalized baseline detection
-* [ ] Multi-person tracking
-
-## Advanced
-
-* [ ] Multimodal analysis
-* [ ] Voice analysis
-* [ ] Speech patterns
-* [ ] Facial + audio fusion
-* [ ] Research datasets
-* [ ] Model benchmarking
-
----
-
-# ⚠️ Important Limitations
-
-A person's facial expressions, eye movements, or other behavioral signals **do not provide a reliable standalone method for determining whether they are lying**.
-
-Many factors can affect observable behavior:
-
-* Stress
-* Anxiety
-* Nervousness
-* Fatigue
-* Personality
-* Cultural differences
-* Lighting
-* Camera quality
-* Environment
-* Individual facial behavior
-
-Therefore, this project should **not** be used to make high-stakes decisions about whether a person is truthful.
-
-It is intended for:
-
-✅ Education
-✅ Computer-vision experimentation
-✅ AI research
-✅ Human-computer interaction experiments
-✅ Demonstrations
-
-Not for:
-
-❌ Criminal investigations
-❌ Hiring decisions
-❌ Legal decisions
-❌ Medical diagnosis
-❌ Determining someone's guilt or innocence
-
----
-
-# 📸 Demo
-
-Add a short demonstration here:
-
-```text
-🎥 Live Demo / GIF
-
-[ Add your demonstration GIF here ]
-```
-
-A good GitHub presentation would include:
-
-* Face-tracking screenshot
-* Live analysis screenshot
-* Feature visualization
-* Short demo video
-
----
-
-# 📂 Project Structure
-
-```text
-lie-detector/
-│
-├── lie detector/
-│   ├── ...
-│   └── ...
-│
-└── README.md
-```
-
----
-
-# 💡 What This Project Explores
-
-The interesting question isn't simply:
-
-> **"Can a computer detect a lie?"**
-
-The deeper question is:
-
-> **"How much can a computer understand about human behavior from visual information?"**
-
-That question opens the door to applications in:
-
-* Human-computer interaction
-* Accessibility
-* Behavioral research
-* Interactive systems
-* Computer vision
-* AI-assisted analysis
-
----
-
-# 🗺️ Roadmap
-
-```text
-                 CURRENT
-                    │
-                    ▼
-            Facial Analysis
-                    │
-                    ▼
-             Better Tracking
-                    │
-                    ▼
-          Temporal Understanding
-                    │
-                    ▼
-           Multimodal Analysis
-                    │
-                    ▼
-           Behavioral Research
-```
-
----
-
-# 👨‍💻 Author
-
-## Rahul Bongu
-
-Building experimental projects at the intersection of:
-
-**AI • Computer Vision • Software • Human-Computer Interaction**
-
-GitHub:
-https://github.com/RahulBongu
-
----
-
-# ⭐ Support
-
-If you find the project interesting, consider giving the repository a ⭐.
-
-Every star helps make experimental projects easier for others to discover.
-
----
-
-# 📄 License
-
-See the repository for the current licensing information.
+*Note: My Gym is an independent fork and redesign and is not officially affiliated with or endorsed by the upstream openGym maintainers.*
