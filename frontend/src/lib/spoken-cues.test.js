@@ -2,14 +2,19 @@ import { afterEach, describe, expect, test, vi } from 'vitest'
 
 vi.mock('./speech.js', () => ({ speak: vi.fn(() => Promise.resolve(true)), voiceOpts: S => ({ rate: S?.speechRate === 'fast' ? 1.25 : 1, pitch: 1, voice: '' }) }))
 const { speak } = await import('./speech.js')
-const { nextSetAfter, setCueText, restStartText, cues, bindCueState, cuesOn, sampleCue } = await import('./spoken-cues.js')
+const { nextSetAfter, setCueText, restStartText, cues, bindCueState, cuesOn, sampleCue, _resetCueQueue } = await import('./spoken-cues.js')
 
 const BENCH = '0025', SQUAT = '0043'
 const set = (w, r, done = false, extra = {}) => ({ w, r, done, ...extra })
 const entry = (id, sets, target = { mode: 'reps' }, extra = {}) => ({ id, target, sets, ...extra })
 const S = (entries, extra = {}) => ({ unit: 'kg', spokenCues: true, active: { cur: 0, entries }, ...extra })
 
-afterEach(() => { speak.mockClear(); bindCueState(null) })
+afterEach(() => {
+  vi.useRealTimers()
+  speak.mockClear()
+  bindCueState(null)
+  _resetCueQueue?.()
+})
 
 describe('what comes next after a rest', () => {
   test('the same exercise, then the next one down the list', () => {
@@ -80,7 +85,7 @@ describe('the moments', () => {
   })
 })
 
-const { _setClipPlayer, _resetCueQueue, isLastSet, speechMs } = await import('./spoken-cues.js')
+const { _setClipPlayer, isLastSet, speechMs } = await import('./spoken-cues.js')
 const { _resetPicks } = await import('./voice-styles.js')
 describe('styles, the last set, records and clips (v1.4.5 Voice)', () => {
   afterEach(() => { _resetCueQueue(); _resetPicks(); vi.useRealTimers() })
@@ -140,12 +145,12 @@ describe('styles, the last set, records and clips (v1.4.5 Voice)', () => {
     expect(speak).toHaveBeenCalledTimes(1)
   })
   test('a clip whose file is not here: the line instead', async () => {
+    _resetCueQueue()
     _setClipPlayer(async () => false)
     const m = { kind: 'audio', hash: 'b'.repeat(64), mime: 'audio/wav', size: 100, width: 1, height: 1, dur: 1 }
     bindCueState(() => ({ ...two(), sounds: [{ id: 'c2', name: 'x', m, voice: 'restOver' }] }))
     cues.restOver()
-    await new Promise(r => setTimeout(r, 5))
-    expect(speak.mock.calls.map(c => c[0])).toEqual(['Rest is over'])
+    await vi.waitFor(() => expect(speak.mock.calls.map(c => c[0])).toEqual(['Rest is over']))
   })
   test('a clip waits for the line before it', async () => {
     vi.useFakeTimers()

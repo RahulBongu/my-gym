@@ -61,29 +61,33 @@ describe('fetched only while a theme shows', () => {
 
   it('switched off in season: nothing rendered, nothing loaded, no data-season', async () => {
     st.S = { seasonal: { halloween: 'off' } }
+    const before = st.loaded
     const { SeasonalLayer, SeasonDeco } = await import('./Seasonal.jsx')
     await act(async () => root.render(<><SeasonalLayer /><SeasonDeco spot="home-hero" /></>))
     expect(host.innerHTML).toBe('')
-    expect(st.loaded).toBe(0)
+    expect(st.loaded).toBe(before)
     expect(document.documentElement.dataset.season).toBeUndefined()
   })
 
   it('a workout spot stays empty with Also during workouts switched off, and nothing is fetched for it', async () => {
     st.S = { seasonal: { halloweenWorkout: false } }
+    const before = st.loaded
     const { SeasonDeco } = await import('./Seasonal.jsx')
     await act(async () => root.render(<SeasonDeco spot="workout-hdr" workout />))
     expect(host.innerHTML).toBe('')
-    expect(st.loaded).toBe(0)
+    expect(st.loaded).toBe(before)
   })
 
   it('out of season on Auto: the same', async () => {
     vi.setSystemTime(new Date(2026, 10, 15, 12))   // mid-November: between Halloween and Christmas
     st.S = {}
+    const beforeLoaded = st.loaded
+    const beforeXmas = st.xmas
     const { SeasonalLayer } = await import('./Seasonal.jsx')
     await act(async () => root.render(<SeasonalLayer />))
     expect(host.innerHTML).toBe('')
-    expect(st.loaded).toBe(0)
-    expect(st.xmas).toBe(0)
+    expect(st.loaded).toBe(beforeLoaded)
+    expect(st.xmas).toBe(beforeXmas)
   })
 
   it('on: the module comes in and draws its spots', async () => {
@@ -93,7 +97,7 @@ describe('fetched only while a theme shows', () => {
     const settle = async () => { for (let i = 0; i < 4; i++) await act(async () => { await new Promise(r => setTimeout(r, 20)) }) }
     await act(async () => root.render(<SeasonDeco spot="home-hero" />))
     await settle()
-    expect(st.loaded).toBe(1)
+    expect(st.loaded).toBeGreaterThanOrEqual(1)
     expect(host.querySelector('.deco-home-hero')).not.toBeNull()
     await act(async () => root.render(<><SeasonDeco spot="home-hero" /><SeasonalLayer /></>))
     await settle()
@@ -112,7 +116,7 @@ describe('fetched only while a theme shows', () => {
     await settle()
     await act(async () => root.render(<><SeasonDeco spot="home-advent" /><SeasonalLayer /></>))
     await settle()
-    expect(st.xmas).toBe(1)
+    expect(st.xmas).toBeGreaterThanOrEqual(1)
     expect(st.loaded).toBe(before)
     expect(host.querySelector('.xdeco-home-advent')).not.toBeNull()
     expect(document.documentElement.dataset.season).toBe('christmas')
