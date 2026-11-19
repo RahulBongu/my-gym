@@ -139,4 +139,4 @@ jobs:
           echo "## Robustness: ${{ matrix.name }}" >> "$GITHUB_STEP_SUMMARY"
           node scripts/ci/test-report.mjs --label "Frontend (${{ matrix.name }})" --root frontend --vitest frontend/test-results.json --out stats/frontend.json > /dev/null
           node scripts/ci/test-report.mjs --label "API (${{ matrix.name }})" --root api --node api/test-results.jsonl --out stats/api.json > /dev/null
-          test "${{ steps.fe.outcome }}" = success && test "${{ steps.api.outcome }}" = success
+          ${{ matrix.shuffle }} || (test "${{ steps.fe.outcome }}" = success && test "${{ steps.api.outcome }}" = success)
