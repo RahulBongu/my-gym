@@ -19,6 +19,7 @@ const httpError = status => Object.assign(new Error('HTTP ' + status), { status 
 beforeEach(() => {
   localStorage.clear()
   api.mockReset()
+  toast.mockClear()
   useStore.setState({ S: clone(DEF), user: null, ready: false })
 })
 
