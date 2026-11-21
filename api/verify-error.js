@@ -2,7 +2,7 @@
 // whoever reads it in the browser has no way to connect that to their .env. A misconfigured
 // RP_ID/ORIGIN is the single most common self-hosting failure (see docs/SELF_HOSTING.md), so
 // name both values back. Neither is a secret: one is the address bar, the other its hostname.
-const MISCONFIGURED = /unexpected (rp id|authentication response origin|registration response origin)/i;
+const MISCONFIGURED = /unexpected (rp id|(authentication |registration )?response origin)/i;
 
 export function verifyError(e, { rpId, origin } = {}) {
   const msg = String((e && e.message) || 'verification failed');
@@ -13,7 +13,10 @@ export function verifyError(e, { rpId, origin } = {}) {
 
 // Whether a verify error is that misconfiguration, so the route can say so with a `code` the app
 // turns into a sentence in the user's language.
-export const isMisconfigured = e => MISCONFIGURED.test(String((e && e.message) || ''));
+export const isMisconfigured = e =>
+  e?.code === 'UNEXPECTED_ORIGIN' ||
+  e?.code === 'UNEXPECTED_RP_ID' ||
+  MISCONFIGURED.test(String((e && e.message) || ''));
 
 // The log line for a write refused by the origin check. tcmac lost a morning to a bare
 // "origin=... expected=..." (Discord, 10-21): the usual cause is not an attack but an api service
