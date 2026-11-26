@@ -42,46 +42,32 @@ beforeEach(() => {
   m.deleteFile = vi.fn(async () => {})
 })
 
-describe('downloadAndInstall (Android)', () => {
-  it('opens the installer only once openGym is back in front (lampi_: downloaded, never installed)', async () => {
-    // The person switched apps while the APK came down: Android would block the installer.
-    m.downloadFile = vi.fn(async () => { m.calls.push('download'); m.cached = true; m.active = false })
-    let done = false
-    const run = downloadAndInstall('https://x/openGym-9.9.9.apk', HASH).then(() => { done = true })
-    await vi.waitFor(() => expect(m.appListeners).toHaveLength(1))
-    await tick(30)
-    expect(m.calls).toEqual(['install', 'download'])   // the cache check, then the download
-    expect(done).toBe(false)
-    comeBack()
-    await run
-    expect(m.calls).toEqual(['install', 'download', 'install'])
-    expect(m.installApk).toHaveBeenLastCalledWith({ fileName: 'opengym-update.apk', sha256: HASH })
-    expect(m.appListeners).toHaveLength(0)   // the listener is gone again
+describe('downloadAndInstall (Android hardened)', () => {
+  it('opens trusted My Gym GitHub release links externally without in-app APK install', async () => {
+    const open = vi.fn()
+    globalThis.window = { open }
+    try {
+      const url = 'https://github.com/RahulBongu/my-gym/releases/download/v9.9.9/my-gym.apk'
+      await downloadAndInstall(url, HASH)
+      expect(open).toHaveBeenCalledWith(url, '_blank', 'noopener,noreferrer')
+      expect(m.installApk).not.toHaveBeenCalled()
+      expect(m.downloadFile).not.toHaveBeenCalled()
+    } finally {
+      delete globalThis.window
+    }
   })
 
-  it('in front all along: downloads and opens the installer straight away', async () => {
-    await downloadAndInstall('https://x/a.apk', HASH.toUpperCase())
-    expect(m.calls).toEqual(['install', 'download', 'install'])
-    expect(m.installApk).toHaveBeenLastCalledWith({ fileName: 'opengym-update.apk', sha256: HASH })
-  })
-
-  it('an APK already downloaded and matching is installed again without a second download', async () => {
-    m.installApk = vi.fn(async () => { m.calls.push('install') })
-    await downloadAndInstall('https://x/a.apk', HASH)
-    expect(m.calls).toEqual(['install'])
-    expect(m.downloadFile).not.toHaveBeenCalled()
-  })
-
-  it('a failed install after the download still reaches the caller', async () => {
-    m.installApk = vi.fn(async () => { throw new Error('SHA-256 mismatch') })
-    await expect(downloadAndInstall('https://x/a.apk', HASH)).rejects.toThrow('SHA-256 mismatch')
-    expect(m.downloadFile).toHaveBeenCalledTimes(1)
-  })
-
-  it('never without a checksum', async () => {
-    await expect(downloadAndInstall('https://x/a.apk', null)).rejects.toThrow(/checksum/)
-    expect(m.installApk).not.toHaveBeenCalled()
-    expect(m.downloadFile).not.toHaveBeenCalled()
+  it('falls back to the canonical My Gym releases page for untrusted or missing URLs', async () => {
+    const open = vi.fn()
+    globalThis.window = { open }
+    try {
+      await downloadAndInstall('https://untrusted.example/app.apk', HASH)
+      expect(open).toHaveBeenCalledWith('https://github.com/RahulBongu/my-gym/releases/latest', '_blank', 'noopener,noreferrer')
+      await downloadAndInstall(null, null)
+      expect(open).toHaveBeenLastCalledWith('https://github.com/RahulBongu/my-gym/releases/latest', '_blank', 'noopener,noreferrer')
+    } finally {
+      delete globalThis.window
+    }
   })
 })
 

@@ -463,8 +463,8 @@ final class GymReminder {
      */
     static boolean trainedElsewhere(Context ctx, String today) {
         JSONObject auth = server(ctx);
-        String base = auth == null ? "" : auth.optString("server", "").replaceAll("/+$", "");
-        if (base.isEmpty()) return false;
+        String base = NudgeCheck.validServerUrl(auth == null ? "" : auth.optString("server", ""));
+        if (base == null) return false;
         if (!online(ctx)) {
             note(ctx, "server check skipped (offline)");
             return false;
@@ -486,7 +486,8 @@ final class GymReminder {
                 if (headers != null) {
                     for (Iterator<String> it = headers.keys(); it.hasNext();) {
                         String k = it.next();
-                        c.setRequestProperty(k, headers.optString(k));
+                        String safeKey = NudgeCheck.sanitizeHeader(k);
+                        if (!safeKey.isEmpty()) c.setRequestProperty(safeKey, NudgeCheck.sanitizeHeader(headers.optString(k)));
                     }
                 }
                 if (c.getResponseCode() != 200) return false;

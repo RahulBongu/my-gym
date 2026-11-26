@@ -16,8 +16,11 @@ const at = (d, h) => new Date(2026, 9, d, h).getTime()
 const rec = (d, h, kg, extra = {}) => ({ t: at(d, h), kg, id: `r${d}${h}`, origin: 'com.withings.wiscale2', clientId: null, ...extra })
 
 describe('isOwnRecord', () => {
-  it('knows openGym by client id and by origin', () => {
+  it('knows openGym and My Gym by client id and by origin', () => {
     expect(isOwnRecord({ clientId: 'opengym-bw-2026-10-15', origin: 'x' })).toBe(true)
+    expect(isOwnRecord({ origin: 'io.github.rahulbongu.mygym' })).toBe(true)
+    expect(isOwnRecord({ origin: 'io.github.rahulbongu.mygym.test' })).toBe(true)
+    expect(isOwnRecord({ origin: 'io.github.rahulbongu.mygymx' })).toBe(false)
     expect(isOwnRecord({ origin: 'ch.duartesantos.opengym' })).toBe(true)
     expect(isOwnRecord({ origin: 'ch.duartesantos.opengym.test' })).toBe(true)
     expect(isOwnRecord({ origin: 'ch.duartesantos.opengymx' })).toBe(false)

@@ -29,10 +29,14 @@ describe('Android backup rules', () => {
     // An <include> would turn either list into an allowlist and drop everything else.
     expect(legacy).not.toMatch(/<include/)
     expect(modern).not.toMatch(/<include/)
-    // Device transfer takes everything but the pairing and the gym reminder's places.
+    // Device transfer takes everything but the pairing, the gym reminder's places, and encrypted nudge check prefs.
     const transfer = modern.match(/<device-transfer>([\s\S]*?)<\/device-transfer>/)?.[1] || ''
     expect(transfer).not.toMatch(EXCLUDE)
-    expect(transfer.match(/<exclude/g)).toHaveLength(2)
+    expect(transfer.match(/<exclude/g)).toHaveLength(3)
+    const NUDGE = /<exclude\s+domain="sharedpref"\s+path="opengym_nudge_check\.xml"\s*\/>/
+    expect(legacy).toMatch(NUDGE)
+    expect(cloud).toMatch(NUDGE)
+    expect(transfer).toMatch(NUDGE)
   })
 
   it('the gym reminder\'s places (#614) never leave the phone: out of every backup and transfer', () => {

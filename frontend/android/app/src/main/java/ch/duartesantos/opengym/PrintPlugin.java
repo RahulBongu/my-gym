@@ -38,7 +38,7 @@ public class PrintPlugin extends Plugin {
             call.reject("html is required");
             return;
         }
-        final String jobName = call.getString("name", "openGym");
+        final String jobName = call.getString("name", "My Gym");
         // The sheet starts on the paper people use where the phone is (lib/print-doc.js paperFor);
         // it can be changed there. Page numbers and margins come from the document's own @page
         // rules, which this WebView (Chromium) prints.
@@ -57,6 +57,12 @@ public class PrintPlugin extends Plugin {
                     return;
                 }
                 WebView webView = new WebView(ctx);
+                android.webkit.WebSettings ws = webView.getSettings();
+                ws.setJavaScriptEnabled(false);
+                ws.setAllowFileAccess(false);
+                ws.setAllowContentAccess(false);
+                ws.setAllowFileAccessFromFileURLs(false);
+                ws.setAllowUniversalAccessFromFileURLs(false);
                 webView.setWebViewClient(new WebViewClient() {
                     @Override
                     public void onPageFinished(WebView view, String url) {

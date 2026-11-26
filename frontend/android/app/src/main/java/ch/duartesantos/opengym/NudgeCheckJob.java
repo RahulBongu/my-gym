@@ -72,16 +72,20 @@ public class NudgeCheckJob extends JobService {
 
     /** The server's answer, or null for anything that is not a 200 with JSON. */
     private static JSONObject ask(String server, String date, JSONObject headers) {
+        String safeServer = NudgeCheck.validServerUrl(server);
+        if (safeServer == null) return null;
         HttpURLConnection c = null;
         try {
-            URL url = new URL(server + "/api/nudge-check?date=" + URLEncoder.encode(date, "UTF-8"));
+            URL url = new URL(safeServer + "/api/nudge-check?date=" + URLEncoder.encode(date, "UTF-8"));
             c = (HttpURLConnection) url.openConnection();
             c.setConnectTimeout(15_000);
             c.setReadTimeout(15_000);
+            c.setInstanceFollowRedirects(false);
             if (headers != null) {
                 for (Iterator<String> it = headers.keys(); it.hasNext(); ) {
                     String k = it.next();
-                    c.setRequestProperty(k, headers.optString(k));
+                    String safeKey = NudgeCheck.sanitizeHeader(k);
+                    if (!safeKey.isEmpty()) c.setRequestProperty(safeKey, NudgeCheck.sanitizeHeader(headers.optString(k)));
                 }
             }
             if (c.getResponseCode() != 200) return null;

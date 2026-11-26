@@ -27,10 +27,15 @@ public class NudgeCheckPlugin extends Plugin {
             call.reject("server is required");
             return;
         }
+        String safeServer = NudgeCheck.validServerUrl(server);
+        if (safeServer == null) {
+            call.reject("invalid server URL");
+            return;
+        }
         try {
             JSObject headers = call.getObject("headers", new JSObject());
             JSArray entries = call.getArray("entries", new JSArray());
-            JSONObject config = new JSONObject().put("server", server).put("headers", headers).put("entries", entries);
+            JSONObject config = new JSONObject().put("server", safeServer).put("headers", headers).put("entries", entries);
             if (!NudgeCheck.save(getContext(), config)) {
                 call.reject("could not keep the check");
                 return;

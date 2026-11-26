@@ -43,7 +43,7 @@ describe('checkForUpdate', () => {
   it('asks GitHub for the latest published release (never a draft or a beta)', async () => {
     mockFetch({ tag_name: 'v' + __APP_VERSION__, assets: [] })
     await checkForUpdate()
-    expect(globalThis.fetch.mock.calls[0][0]).toBe('https://api.github.com/repos/DuarteSantos8/openGym/releases/latest')
+    expect(globalThis.fetch.mock.calls[0][0]).toBe('https://api.github.com/repos/RahulBongu/my-gym/releases/latest')
   })
 
   it('reports no update when the latest release matches the current version', async () => {
@@ -411,34 +411,19 @@ describe('the API asset link as a fallback on the phone', () => {
     expect(await mod.fetchChecksum('https://github.com/d/a.apk.sha256', API + '2')).toBe(null)
   })
 
-  it('APK: a rejected download from github.com comes down from the API link instead', async () => {
-    m.downloadFile = vi.fn(async a => {
-      m.calls.push('download ' + a.url)
-      if (!a.url.startsWith(API)) throw new Error('HTTP 504')
-    })
-    let n = 0
-    m.installApk = vi.fn(async () => { m.calls.push('install'); if (n++ === 0) throw new Error('APK file not found') })
-    await mod.downloadAndInstall('https://github.com/d/a.apk', HEX, null, API + '1')
-    expect(m.calls).toEqual(['install', 'download https://github.com/d/a.apk', 'download ' + API + '1', 'install'])
-    expect(m.downloadFile).toHaveBeenLastCalledWith(expect.objectContaining({ url: API + '1', headers: ACCEPT, path: 'opengym-update.apk' }))
-  })
-
-  it('APK: a file the Install plugin refuses is downloaded once from the API link and installed again', async () => {
-    let n = 0
-    m.installApk = vi.fn(async () => { m.calls.push('install'); if (n++ < 2) throw new Error('SHA-256 mismatch') })
-    await mod.downloadAndInstall('https://github.com/d/a.apk', HEX, null, API + '1')
-    expect(m.calls).toEqual(['install', 'download https://github.com/d/a.apk', 'install', 'download ' + API + '1', 'install'])
-    expect(m.installApk).toHaveBeenLastCalledWith({ fileName: 'opengym-update.apk', sha256: HEX })
-  })
-
-  it('APK: the API copy refused too reaches the caller, and there is no third download', async () => {
-    m.installApk = vi.fn(async () => { m.calls.push('install'); throw new Error('SHA-256 mismatch') })
-    await expect(mod.downloadAndInstall('https://github.com/d/a.apk', HEX, null, API + '1')).rejects.toThrow('SHA-256 mismatch')
-    expect(m.downloadFile).toHaveBeenCalledTimes(2)
-  })
-
-  it('APK: still never without a checksum', async () => {
-    await expect(mod.downloadAndInstall('https://github.com/d/a.apk', null, null, API + '1')).rejects.toThrow(/checksum/)
-    expect(m.downloadFile).not.toHaveBeenCalled()
+  it('APK: opens trusted GitHub release URLs in the browser instead of downloading in-app', async () => {
+    const open = vi.fn()
+    globalThis.window = { open }
+    try {
+      const trusted = 'https://github.com/RahulBongu/my-gym/releases/download/v1.0.0/my-gym.apk'
+      await mod.downloadAndInstall(trusted, HEX)
+      expect(open).toHaveBeenCalledWith(trusted, '_blank', 'noopener,noreferrer')
+      await mod.downloadAndInstall('https://evil.example/payload.apk', HEX)
+      expect(open).toHaveBeenLastCalledWith('https://github.com/RahulBongu/my-gym/releases/latest', '_blank', 'noopener,noreferrer')
+      expect(m.downloadFile).not.toHaveBeenCalled()
+      expect(m.installApk).not.toHaveBeenCalled()
+    } finally {
+      delete globalThis.window
+    }
   })
 })

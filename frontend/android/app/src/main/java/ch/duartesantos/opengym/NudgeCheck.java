@@ -189,4 +189,26 @@ final class NudgeCheck {
             storage.deleteNotification(String.valueOf(id));
         }
     }
+
+    /** Validates a paired server base URL before storing or requesting it. */
+    static String validServerUrl(String raw) {
+        if (raw == null) return null;
+        String s = raw.trim().replaceAll("/+$", "");
+        if (s.isEmpty() || s.indexOf('\r') >= 0 || s.indexOf('\n') >= 0) return null;
+        try {
+            java.net.URI u = java.net.URI.create(s);
+            String scheme = u.getScheme();
+            String host = u.getHost();
+            if ((!"https".equals(scheme) && !"http".equals(scheme)) || host == null || host.isEmpty()) return null;
+            if (u.getRawUserInfo() != null) return null;
+            return s;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /** Strips CR/LF characters before forwarding header names or values to HttpURLConnection. */
+    static String sanitizeHeader(String value) {
+        return value == null ? "" : value.replace("\r", "").replace("\n", "");
+    }
 }

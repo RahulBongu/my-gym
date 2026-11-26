@@ -13,7 +13,7 @@ import { logRequest } from './net-log.js'
 import { MOBILE } from './mobile.js'
 import { APK_VARIANTS, APK_VARIANT } from './apk-variant.js'
 
-const REPO = 'DuarteSantos8/openGym'
+const REPO = 'RahulBongu/my-gym'
 const LATEST_URL = `https://api.github.com/repos/${REPO}/releases/latest`
 export const RELEASES_PAGE = `https://github.com/${REPO}/releases/latest`
 
@@ -154,68 +154,17 @@ export async function whenInForeground(app) {
   })
 }
 
-const installPlugin = async () => {
-  const { registerPlugin } = await import('@capacitor/core')
-  // Handed out inside an object: a plugin proxy answers `then`, and a promise resolved with
-  // the bare proxy never settles (#42).
-  return { Install: registerPlugin('Install') }
-}
-
 /**
- * Downloads the APK from `url` into the cache directory, natively and straight to disk, and
- * hands it to the Install plugin, which checks it against `expectedHash` before the installer
- * opens. Only works on the MOBILE (Capacitor) build with Android.
+ * Opens the verified My Gym GitHub Releases page in the system browser instead of invoking an
+ * in-app APK package installer (which would require REQUEST_INSTALL_PACKAGES).
  *
- * An APK that already came down and matches the hash (the installer did not show the last time,
- * or was dismissed) is installed again without downloading it twice. One that does not match is
- * deleted by the plugin and downloaded afresh.
- *
- * @param {string} url - Direct download URL for the APK
- * @param {string} expectedHash - Expected SHA-256 hex string (from the .sha256 asset)
- * @param {function|null} onProgress - Called with (received, total) bytes during download, or null
- * @param {string|null} apiUrl - The API's link to the same APK, used once when the
- *   download from `url` fails or the file it gave is refused (an error page saved as the APK)
+ * @param {string} url - Candidate release URL (must stay under RahulBongu/my-gym releases)
  */
-export async function downloadAndInstall(url, expectedHash, onProgress = null, apiUrl = null) {
-  if (!MOBILE) {
-    window.open(RELEASES_PAGE, '_blank', 'noopener')
-    return
-  }
-  if (!/^[0-9a-f]{64}$/i.test(expectedHash || '')) throw new Error('no checksum to verify the download against')
-  const sha256 = expectedHash.toLowerCase()
-  const { Install } = await installPlugin()
-  // The Install plugin streams the file through SHA-256 natively (300 MB never enter the
-  // WebView) and refuses a mismatch, or a missing file, before the installer opens.
-  try {
-    await Install.installApk({ fileName: UPDATE_FILE, sha256 })
-    return
-  } catch { /* nothing usable in the cache yet: download it */ }
-  const { Filesystem, Directory } = await import('@capacitor/filesystem')
-  const download = async (from, headers) => {
-    const listener = onProgress
-      ? await Filesystem.addListener('progress', p => onProgress(p.bytes, p.contentLength))
-      : null
-    try {
-      logRequest(from, { via: 'native' })
-      await Filesystem.downloadFile({ url: from, path: UPDATE_FILE, directory: Directory.Cache, progress: !!onProgress, ...(headers && { headers }) })
-    } finally {
-      await listener?.remove()
-    }
-  }
-  // One fallback to the API link, when the download fails or the installer refuses its file
-  let fromApi = false
-  try { await download(url) } catch (e) {
-    if (!apiUrl) throw e
-    await download(apiUrl, API_ASSET)
-    fromApi = true
-  }
-  await whenInForeground()
-  try { await Install.installApk({ fileName: UPDATE_FILE, sha256 }) } catch (e) {
-    if (!apiUrl || fromApi) throw e
-    await download(apiUrl, API_ASSET)
-    await whenInForeground()
-    await Install.installApk({ fileName: UPDATE_FILE, sha256 })
-  }
+export async function downloadAndInstall(url, _expectedHash = null, _onProgress = null, _apiUrl = null) {
+  const safeUrl = typeof url === 'string' && url.startsWith(`https://github.com/${REPO}/releases/`)
+    ? url
+    : RELEASES_PAGE
+  window.open(safeUrl, '_blank', 'noopener,noreferrer')
 }
 
 /**

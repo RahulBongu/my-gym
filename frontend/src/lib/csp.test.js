@@ -18,7 +18,7 @@ describe('web Content-Security-Policy', () => {
     const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1])
     expect(inline.length).toBeGreaterThan(0)
     const scripts = directive('script-src')
-    for (const body of inline) expect(scripts).toContain(`'sha256-${createHash('sha256').update(body).digest('base64')}'`)
+    for (const body of inline) expect(scripts).toContain(`'sha256-${createHash('sha256').update(body.replace(/\r\n/g, '\n')).digest('base64')}'`)
     expect(scripts).not.toContain("'unsafe-inline'")
     expect(scripts).not.toContain("'unsafe-eval'")
   })

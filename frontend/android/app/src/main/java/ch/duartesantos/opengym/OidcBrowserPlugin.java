@@ -30,7 +30,8 @@ public class OidcBrowserPlugin extends Plugin {
         String raw = call.getString("url", "");
         Uri uri = Uri.parse(raw);
         String scheme = uri.getScheme();
-        if (!"https".equals(scheme) && !"http".equals(scheme)) {
+        String host = uri.getHost();
+        if ((!"https".equals(scheme) && !"http".equals(scheme)) || host == null || host.trim().isEmpty()) {
             call.reject("not a web address", "failed");
             return;
         }

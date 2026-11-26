@@ -157,9 +157,14 @@ public class GymReminderPlugin extends Plugin {
         String server = call.getString("server", "");
         JSONObject auth = null;
         if (server != null && !server.isEmpty()) {
+            String safeServer = NudgeCheck.validServerUrl(server);
+            if (safeServer == null) {
+                call.reject("invalid server URL");
+                return;
+            }
             auth = new JSONObject();
             try {
-                auth.put("server", server);
+                auth.put("server", safeServer);
                 JSObject h = call.getObject("headers");
                 auth.put("headers", h == null ? new JSONObject() : h);
             } catch (Exception e) {

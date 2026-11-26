@@ -1,10 +1,12 @@
 package ch.duartesantos.opengym;
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -50,6 +52,7 @@ public class MainActivity extends BridgeActivity {
         // Settings → Screen orientation (#821), before the first frame: no turn on the way in.
         OrientationPlugin.applySaved(this);
         super.onCreate(savedInstanceState);
+        WebView.setWebContentsDebuggingEnabled((getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0);
         // After super: BridgeActivity swaps the splash theme for the app's own there, and the
         // overlay has to go on top of that one (AccentTheme.java, #980).
         AccentTheme.apply(this);
@@ -63,8 +66,8 @@ public class MainActivity extends BridgeActivity {
     }
 
     // Health Connect's "why does this app ask?" link (the two activity-aliases in the manifest)
-    // must show the privacy policy, the same one the Play listing names: opened in the browser.
-    static final String PRIVACY_URL = "https://opengym.ch/privacy";
+    // must show the privacy policy: opened in the browser.
+    static final String PRIVACY_URL = "https://github.com/RahulBongu/my-gym/blob/main/website/privacy.html";
     static boolean isHealthRationale(String action) {
         return "androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE".equals(action)
                 || "android.intent.action.VIEW_PERMISSION_USAGE".equals(action);
@@ -102,6 +105,10 @@ public class MainActivity extends BridgeActivity {
         if (bridge == null) return;
         WebView web = bridge.getWebView();
         if (web == null || !(web.getParent() instanceof View)) return;
+        WebSettings settings = web.getSettings();
+        settings.setAllowFileAccess(false);
+        settings.setAllowFileAccessFromFileURLs(false);
+        settings.setAllowUniversalAccessFromFileURLs(false);
         // Read on the WebView's parent, which hands them on to the WebView untouched. A listener on
         // the WebView itself would replace the one the WebView installs for its own insets, and
         // env(safe-area-inset-top) went to 0 on every start.

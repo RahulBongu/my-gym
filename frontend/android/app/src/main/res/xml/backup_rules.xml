@@ -12,4 +12,5 @@
     <exclude domain="file" path="opengym-media/" />
     <exclude domain="file" path="opengym-remote.json" />
     <exclude domain="sharedpref" path="opengym_gym_reminder.xml" />
+    <exclude domain="sharedpref" path="opengym_nudge_check.xml" />
 </full-backup-content>

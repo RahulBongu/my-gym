@@ -1,10 +1,10 @@
 {
-  "appId": "ch.duartesantos.opengym",
-  "appName": "openGym",
+  "appId": "io.github.rahulbongu.mygym",
+  "appName": "My Gym",
   "webDir": "dist",
-  "backgroundColor": "#0c0e12",
+  "backgroundColor": "#0D110F",
   "android": {
-    "allowMixedContent": true
+    "allowMixedContent": false
   },
   "plugins": {
     "SystemBars": {
@@ -14,7 +14,7 @@
       "launchShowDuration": 8000,
       "launchAutoHide": true,
       "launchFadeOutDuration": 180,
-      "backgroundColor": "#0c0e12",
+      "backgroundColor": "#0D110F",
       "showSpinner": false
     }
   }
