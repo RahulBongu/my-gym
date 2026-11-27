@@ -12,6 +12,7 @@ import { bwSheet, goalSheet, dayOverrideSheet, calendarSheet, starterPlanSheet, 
 import { startOrPreview, startPickerSheet } from '../components/StartSheets.jsx'
 import { daySessionsStatus } from '../lib/day-sessions.js'
 import { deriveSessionName } from '../lib/session-merge.js'
+import LineChart from '../components/LineChart.jsx'
 import Icon from '../components/Icon.jsx'
 import CardHead from '../components/CardHead.jsx'
 import QueueRow from '../components/QueueRow.jsx'
@@ -25,6 +26,7 @@ import { Button } from '../components/ui.jsx'
 import { tappable } from '../lib/use-sheet-keyboard.js'
 import { glyphOf } from '../lib/glyphs.js'
 import { dayNoteOf } from '../lib/day-notes.js'
+import { weighInAt } from '../lib/bodyweight.js'
 import { programmeChip } from '../lib/programmes.js'
 import { SeasonDeco } from '../components/Seasonal.jsx'
 import { isOn } from '../lib/modules.js'
@@ -112,6 +114,7 @@ export default function Home() {
   const streak = useMemo(() => streakInfo(S, todayKey), [S.workouts, S.weekStart, S.streakRule, S.recoverySessions, S.recoveryStreak, S.activities, S.activityStreak, todayKey]) // eslint-disable-line react-hooks/exhaustive-deps
   // Settings → Modules (lib/modules.js): what a module switched off hides here.
   const on = id => isOn(S, id)
+  const bwPoints = S.bodyweight.slice(-30).map(b => ({ t: weighInAt(b), y: b.w, d: b.d }))
 
   // today's session shown right under the week strip
   const onToday = () => { if (S.active) nav('/workout'); else if (todayRoutines.length) startOrPreview(effectiveRoutineIds(S, todayISO())); else dayOverrideSheet(todayISO()) }
@@ -271,6 +274,7 @@ export default function Home() {
             <span>{t('Goal')} {fmtNum(S.targetW)} {S.unit} · {Math.abs(S.targetW - bw.w) < 0.05 ? t('reached!') : t(S.targetW > bw.w ? '{0} to gain' : '{0} to lose', fmtNum(Math.abs(S.targetW - bw.w)) + ' ' + S.unit)}</span>
           </div>
         )}
+        <div className="chart" style={{ marginTop: 8 }}><LineChart points={bwPoints} h={130} unit={S.unit} goal={S.targetW} /></div>
         <div className="row between" style={{ marginTop: 6 }}>
           <Button size="sm" variant="ghost" icon="target" className="bw-goal" style={S.targetW ? { color: 'var(--gold-ink)' } : undefined} onClick={goalSheet}>{S.targetW ? fmtNum(S.targetW) : t('Goal')}</Button>
           <Button size="sm" variant="ghost" trailingIcon="chevronRight" data-tour="home-weighins" onClick={weighInsSheet}>{t('All weigh-ins')}</Button>
