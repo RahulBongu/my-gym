@@ -170,13 +170,13 @@ const CHART_CSS = `
   svg .ax { font-size: 9px; fill: #8a909d; font-family: inherit; }
   svg .val { font-size: 9.5px; fill: #3b404b; font-weight: 600; font-family: inherit; }
   svg .bar { fill: #6b7180; }
-  svg .bar.hot { fill: #b8380b; }
-  svg .line { fill: none; stroke: #4b403a; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
-  svg .dot { fill: #4b403a; stroke: #fff; stroke-width: 1.2; }
-  svg .dot.hot { fill: #d14615; stroke: #a73400; stroke-width: 1.4; }
+  svg .bar.hot { fill: #4338ca; }
+  svg .line { fill: none; stroke: #334155; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+  svg .dot { fill: #334155; stroke: #fff; stroke-width: 1.2; }
+  svg .dot.hot { fill: #4f46e5; stroke: #3730a3; stroke-width: 1.4; }
   svg.cal { display: block; }
-  svg.cal .l0 { fill: #f3ede3; } svg.cal .l1 { fill: #ffe6db; } svg.cal .l2 { fill: #f9b59b; }
-  svg.cal .l3 { fill: #eb5e28; } svg.cal .l4 { fill: #a73400; }
+  svg.cal .l0 { fill: #eef2f7; } svg.cal .l1 { fill: #e0e7ff; } svg.cal .l2 { fill: #a5b4fc; }
+  svg.cal .l3 { fill: #6366f1; } svg.cal .l4 { fill: #3730a3; }
 `
 
 /* ------------------------------- shared page CSS ------------------------------- */

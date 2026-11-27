@@ -2,74 +2,60 @@
 
 ## 1. Design Tokens & Color Palettes
 
-My Gym features a warm editorial Light-first design system engineered with **Google Stitch MCP** (`projects/10906287608289081816`, design system *"Warm Editorial Fitness"*) and configured through CSS custom properties in `frontend/src/index.css`.
+My Gym features a clean **Daylight Studio & Electric Indigo** design system configured through CSS custom properties in `frontend/src/index.css`.
 
-### 1.1 Light Theme (Default — Warm Editorial Cream)
+### 1.1 Light Theme (Default — Crisp Daylight Studio)
 | Token | Variable | Value | Purpose |
 |---|---|---|---|
-| Clean Canvas | `--bg` | `#FAF6F0` | Warm Alabaster Cream canvas |
-| Elevated Surface | `--bg-el` | `#F3EDE3` | Warm Sand headers and sheet backdrops |
+| Clean Canvas | `--bg` | `#F3F5F9` | Cool studio alabaster page background |
+| Elevated Surface | `--bg-el` | `#EAEEF5` | Sheet headers and inset backdrops |
 | Card Surface | `--surface` | `#FFFFFF` | Pure crisp elevated card containers |
-| Nested Surface | `--surface-2` | `#F3EDE3` | Recessed wells, input pills, rest rows |
-| Control Surface | `--surface-3` | `#E8DFD2` | Segmented tracks, inactive controls |
-| Hairline Border | `--border-card` | `#EAE2D6` | Warm stone 1px card outline |
-| Primary Accent | `--acc` | `#D14615` | Burnt Coral primary fill (4.57:1 contrast with white text) |
-| Accent Active | `--acc-2` | `#A73400` | Pressed / active state coral |
-| Accessible Accent Text | `--acc-ink` | `#B8380B` | Deep terracotta small text & inline action ink (>5.5:1) |
-| On-Accent Ink | `--on-acc` | `#FFFFFF` | Crisp white typography on filled coral CTAs |
-| Primary Text | `--label` | `#1E1815` | Deep Espresso body & heading ink (>15:1) |
-| Secondary Text | `--label-2` | `rgba(30,24,21,.72)` | Secondary captions & labels (>7:1) |
-| Floating Nav Dock | `#tabbar` | `#211B18` (`rgba(33,27,24,.94)`) | Deep Espresso floating bottom pill navigation dock |
+| Nested Surface | `--surface-2` | `#EEF2F7` | Recessed wells, input pills, rest rows |
+| Control Surface | `--surface-3` | `#E2E7F0` | Segmented tracks, inactive switches |
+| Hairline Border | `--border-card` | `#E2E8F0` | Clean slate 1px card outline |
+| Primary Accent | `--acc` | `#4F46E5` | Electric Indigo primary fill (6.29:1 contrast with white text) |
+| Accent Active | `--acc-2` | `#4338CA` | Pressed / deeper indigo state |
+| Accessible Accent Text | `--acc-ink` | `#4338CA` | Deep indigo small text & active nav ink (7.9:1 on white) |
+| On-Accent Ink | `--on-acc` | `#FFFFFF` | Crisp white typography on filled indigo CTAs |
+| Primary Text | `--label` | `#0F172A` | Deep Midnight Slate ink (>17:1 on white) |
+| Secondary Text | `--label-2` | `rgba(15,23,42,.70)` | Secondary captions & labels (>6.8:1) |
+| Hero Surface | `.home-hero` | `#0F172A → #1E293B` | High-contrast Midnight Slate workout focus card |
+| Floating Nav Dock | `#tabbar` | `#FFFFFF` (`rgba(255,255,255,.94)`) | Frosted pure white floating bottom pill dock |
 
-### 1.2 Dark Theme (Optional — Warm Deep Espresso)
+### 1.2 Dark Theme (Optional — Midnight Navy)
 | Token | Variable | Value | Purpose |
 |---|---|---|---|
-| Deep Canvas | `--bg` | `#161210` | Warm espresso obsidian background |
-| Elevated Surface | `--bg-el` | `#1B1614` | Backdrops for sheets and floating bars |
-| Card Surface | `--surface` | `#211B18` | Card & grouped-list containers |
-| Nested Surface | `--surface-2` | `#2C2420` | Pressed states, sub-cards, nested controls |
-| Control Surface | `--surface-3` | `#382E29` | Segmented controls, inactive switches |
-| Raised Surface | `--surface-raised` | `#2E2521` | Dialogs and floating rest timer card |
-| Primary Accent | `--acc` | `#F06D3B` | Luminous Coral accent fill |
-| Accent Ink on Fill | `--on-acc` | `#0C0E12` | High-contrast dark typography on coral fills (>6.4:1) |
-| Primary Text | `--label` | `#FAF6F0` | Warm cream readable ink |
-| Secondary Text | `--label-2` | `rgba(250,246,240,.66)` | Subtitles, secondary metrics |
-| Muted Border | `--border-card` | `#332924` | Warm espresso hairline card frame |
+| Deep Canvas | `--bg` | `#0B0F17` | Deep Midnight Navy background |
+| Elevated Surface | `--bg-el` | `#111827` | Backdrops for sheets and floating bars |
+| Card Surface | `--surface` | `#151E2E` | Card & grouped-list containers |
+| Nested Surface | `--surface-2` | `#1E293B` | Pressed states, sub-cards, nested controls |
+| Control Surface | `--surface-3` | `#273549` | Segmented controls, inactive switches |
+| Raised Surface | `--surface-raised` | `#1E293B` | Dialogs and floating rest timer card |
+| Primary Accent | `--acc` | `#60A5FA` | Luminous Electric Blue accent fill |
+| Accent Ink on Fill | `--on-acc` | `#0F172A` | High-contrast dark typography on blue fills (>7.6:1) |
+| Primary Text | `--label` | `#F8FAFC` | Crisp near-white slate ink |
+| Secondary Text | `--label-2` | `rgba(248,250,252,.68)` | Subtitles, secondary metrics |
+| Muted Border | `--border-card` | `#222D3F` | Dark navy hairline card frame |
 
 ---
 
-## 2. Typography Scale
-
-The typographic hierarchy prioritizes rapid legibility between sets:
-
-- **Screen Title:** System UI Sans Bold (`34px`, tight tracking `-0.028em`)
-- **Card Header:** SemiBold (`17px–20px`, crisp weight contrast)
-- **Hero Metric Value:** Tabular SemiBold (`30px`, `font-variant-numeric: tabular-nums`)
-- **Set Stepper Numbers:** Tabular Medium/SemiBold (`17px` capped at `1.12x` text scale for fit)
-- **Micro-label / Kicker:** Bold uppercase caption (`11px–12px`, `letter-spacing: 0.05em`)
-
----
-
-## 3. Geometry & Spacing
+## 2. Geometry & Tap Targets
+- **Header Actions & Settings Control:**
+  - Header action squircles (`.hdr .iconbtn`): `44px × 44px`, `border-radius: 14px`, `21px` glyph.
+  - Home Settings button (`.hdr .iconbtn.hdr-settings`): `46px × 46px`, `border-radius: 15px`, `23px` gear icon with crisp card surface & border.
 - **Corner Radii:**
   - Micro / Badge: `10px` (`--r-sm`)
   - Rows & Inputs: `14px` (`--r`)
-  - Cards & Grouped Lists: `20px` (`--r-card`)
+  - Cards & Quick Routine Tiles: `20px` (`--r-card`)
   - Modals & Sheets: `22px` (`--r-xl`)
-  - Primary CTA Buttons, Chips & Floating Bottom Dock: `28px` / `999px` (Full pill)
-- **Tap Targets:**
-  - Standard button: `44px` height minimum
-  - Set completion badge & steppers: `44px+` dedicated hit area
+  - Pill CTAs & Floating Bottom Dock: `28px` / `999px`
 
 ---
 
-## 4. Component Patterns
-
+## 3. Core Screen Structure
 1. **Today Hero Card (`Home.jsx`):**
-   - Clean 7-day calendar strip at top, single high-contrast Burnt Coral pill CTA (`Start`), and quiet `Choose a different workout` secondary link.
-2. **At-a-Glance Bento Row (`Home.jsx`):**
-   - Streamlined Body Weight trend + Streak consistency cards (`Recap`, `Deload`, `Challenges`, `RecoveryHint`, `Wrapped`, `StreakRule` removed from Home by default to eliminate vertical scrolling overload).
-3. **Floating Espresso Dock (`#tabbar`):**
-   - Floating `#211B18` pill dock over warm cream canvas, centered coral Start action button, and crisp high-contrast cream/warm-coral icons.
-4. **Kairo Companion Pill (`Kairo.jsx`):**
-   - Warm white editorial card with `#EAE2D6` hairline border, soft radial coral wash, and concise contextual guidance.
+   - Midnight Slate feature card holding interactive 7-day calendar strip, Today's Workout title + Start CTA, and live exercise preview pills from the planned routine.
+2. **Quick-Start Routine Grid (`Home.jsx`):**
+   - Pre-seeded by default on first local start (`Push`, `Pull`, `Legs` via `buildStarterPlan('ppl')`) so new users have real exercises ready immediately and can launch any workout in 1 tap from Home.
+3. **Calm Utility Screens (`Library.jsx`, `Stats.jsx`, `Home.jsx`):**
+   - Removed intrusive coach banner boxes from daily utility screens so workouts, exercises, and progress appear cleanly above the fold.

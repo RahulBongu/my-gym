@@ -1,18 +1,17 @@
 import TrainerNotice from '../components/TrainerNotice.jsx'
-import Kairo from '../components/Kairo.jsx'
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore.js'
 import { effectiveRoutines, effectiveRoutineIds, nextTrainingDay, lastBW } from '../lib/history.js'
 import { streakInfo } from '../lib/streak.js'
 import { StreakFlame, StreakMeta, StreakParty } from '../components/Streak.jsx'
-import { fmtNum, fmtDate, todayISO, isoOf, weekStartOf, weekDayOffset, DAYS, DAYN } from '../lib/format.js'
-import { t, tn, dateLocale } from '../lib/i18n.js'
+import { fmtNum, fmtDate, todayISO, isoOf, weekStartOf, weekDayOffset, DAYS, DAYN, exCount } from '../lib/format.js'
+import { t, tn, dateLocale, exerciseNameFor } from '../lib/i18n.js'
+import { exOr } from '../lib/exercises.js'
 import { bwSheet, goalSheet, dayOverrideSheet, calendarSheet, starterPlanSheet, bwDeltaColor, weighInsSheet } from '../sheets.jsx'
 import { startOrPreview, startPickerSheet } from '../components/StartSheets.jsx'
 import { daySessionsStatus } from '../lib/day-sessions.js'
 import { deriveSessionName } from '../lib/session-merge.js'
-import LineChart from '../components/LineChart.jsx'
 import Icon from '../components/Icon.jsx'
 import CardHead from '../components/CardHead.jsx'
 import QueueRow from '../components/QueueRow.jsx'
@@ -26,8 +25,6 @@ import { Button } from '../components/ui.jsx'
 import { tappable } from '../lib/use-sheet-keyboard.js'
 import { glyphOf } from '../lib/glyphs.js'
 import { dayNoteOf } from '../lib/day-notes.js'
-import { weighInAt } from '../lib/bodyweight.js'
-import WeightRate from '../components/WeightRate.jsx'
 import { programmeChip } from '../lib/programmes.js'
 import { SeasonDeco } from '../components/Seasonal.jsx'
 import { isOn } from '../lib/modules.js'
@@ -115,7 +112,6 @@ export default function Home() {
   const streak = useMemo(() => streakInfo(S, todayKey), [S.workouts, S.weekStart, S.streakRule, S.recoverySessions, S.recoveryStreak, S.activities, S.activityStreak, todayKey]) // eslint-disable-line react-hooks/exhaustive-deps
   // Settings → Modules (lib/modules.js): what a module switched off hides here.
   const on = id => isOn(S, id)
-  const bwPoints = S.bodyweight.slice(-30).map(b => ({ t: weighInAt(b), y: b.w, d: b.d }))
 
   // today's session shown right under the week strip
   const onToday = () => { if (S.active) nav('/workout'); else if (todayRoutines.length) startOrPreview(effectiveRoutineIds(S, todayISO())); else dayOverrideSheet(todayISO()) }
@@ -127,58 +123,18 @@ export default function Home() {
   // its own Start and its own Done. Only while nothing runs; a running one is the row above.
   const apartSessions = S.active ? [] : daySessionsStatus(S, todayISO()).filter(x => x.routines.length)
   const splitDay = apartSessions.length > 1
-
-  const kairoPose = S.active
-    ? 'focus'
-    : doneToday
-    ? 'celebrate'
-    : todayRoutines.length
-    ? 'encourage'
-    : next
-    ? 'rest'
-    : 'welcome'
-
-  const kairoTag = S.active
-    ? t('Kairo Training Focus')
-    : doneToday
-    ? t('Kairo Victory')
-    : todayRoutines.length
-    ? t('Kairo Coach')
-    : next
-    ? t('Kairo Recovery')
-    : t('Kairo Companion')
-
-  const kairoMessage = S.active
-    ? t('Workout session in progress! Maintain high tempo and stay locked in.')
-    : doneToday
-    ? t("Today's session completed! Great consistency. Refuel and stay hydrated.")
-    : todayRoutines.length
-    ? t("Ready for {0}? Focus on form and drive steady progressive overload!", todayName)
-    : next
-    ? t('Active recovery day. Next scheduled session: {0}. Rest up!', fmtDate(next))
-    : t("Welcome to My Gym! Pick a starter plan or create your first routine in Plan.")
+  const heroExs = todayRoutines.flatMap(r => r.ex || [])
 
   return <div className="narrow">
     <div className="hdr">
       <SeasonDeco spot="header-bats" />
       <div><h1>{user ? t('Hi {0}', user.name) : 'My Gym'}</h1><div className="sub">{today.toLocaleDateString(dateLocale(), { weekday: 'long', day: 'numeric', month: 'long' })}</div></div>
-      <button className="iconbtn" data-tour="settings-gear" onClick={() => nav('/settings')} aria-label={trouble ? t('Settings') + ', ' + t('Connection problem') : t('Settings')}><Icon name="gear" />{trouble && <span className="tab-dot" aria-hidden="true" />}</button>
-    </div>
-
-    <div className="kairo-home-card" role="region" aria-label={t('Coach advice')}>
-      <Kairo pose={kairoPose} size="md" />
-      <div className="kairo-home-content">
-        <div className="kairo-home-tag">
-          <span className="kairo-tag-dot" />
-          {kairoTag}
-        </div>
-        <div className="kairo-home-msg">{kairoMessage}</div>
-      </div>
+      <button className="iconbtn hdr-settings" data-tour="settings-gear" onClick={() => nav('/settings')} aria-label={trouble ? t('Settings') + ', ' + t('Connection problem') : t('Settings')} title={t('Settings')}><Icon name="gear" />{trouble && <span className="tab-dot" aria-hidden="true" />}</button>
     </div>
 
     <TrainerNotice />
 
-    <div className="card">
+    <div className="card home-hero">
       {/* A running programme (lib/programmes.js) wrote this week's plan: where it stands, one tap from its screen. */}
       {progChip && <button type="button" className="chip ichip prog-chip" onClick={() => nav('/plan/programmes')}><Icon name="calendar" /><span>{progChip}</span></button>}
       {/* A coach week runs by order, not by weekday, so its progress row stands in for the
@@ -246,13 +202,33 @@ export default function Home() {
           and your other routines) is only reachable on a day with nothing planned. The one other
           way in, "Choose a different workout" on the weigh-in sheet, does not exist when the
           weigh-in is switched off. This is that door, and it starts nothing on its own. */}
-      {!S.active && <div style={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
+      {!S.active && !splitDay && heroExs.length > 0 && <div className="hero-exs">
+        {heroExs.slice(0, 3).map((e, idx) => <span key={e.id + ':' + idx} className="hero-ex-pill">{exerciseNameFor(exOr(e.id))}</span>)}
+        {heroExs.length > 3 && <span className="hero-ex-pill">+{heroExs.length - 3}</span>}
+      </div>}
+      {!S.active && <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
         <Button size="sm" variant="ghost" className="dim" icon="swap" onClick={startPickerSheet}>
           {t('Choose a different workout')}
         </Button>
       </div>}
       {on('seasonal') && <SeasonDeco spot="home-hero" />}
     </div>
+
+    {!S.active && S.routines.length > 0 && <>
+      <div className="home-sec-title">{t('Your routines')}</div>
+      <div className="home-routines">
+        {S.routines.slice(0, 6).map(r => (
+          <button key={r.id} type="button" className="routine-tile" onClick={() => startOrPreview([r.id])}>
+            <span className="routine-tile-ic"><Icon name={glyphOf(r.emoji)} /></span>
+            <span className="routine-tile-meta">
+              <div className="routine-tile-name">{r.name}</div>
+              <div className="routine-tile-sub">{exCount((r.ex || []).length)}</div>
+            </span>
+            <Icon name="play" style={{ fontSize: 'var(--fs-footnote)', color: 'var(--acc-ink)' }} />
+          </button>
+        ))}
+      </div>
+    </>}
 
     {on('seasonal') && <SeasonDeco spot="home-advent" />}
 
@@ -275,13 +251,12 @@ export default function Home() {
 
     <div className="home-glance">
     {on('body') && S.showWeightCard !== false && <div className="card">
-      {/* one trailing action, Log; the goal lives with the goal line and the weigh-ins below (P2) */}
+      {/* one trailing action, Log; detailed charts stay in Stats so Home stays calm */}
       <CardHead icon="scale" tint="var(--teal)" title={t('Body weight')} className="bw-head"
         action={<Button size="sm" icon="plus" onClick={() => bwSheet()}>{t('Log')}</Button>} />
       {bw ? <>
         <div className="row" style={{ gap: 8, alignItems: 'baseline' }}>
           <div className="big">{fmtNum(bw.w)} <span className="muted" style={{ fontSize: 'var(--fs-callout)' }}>{S.unit}</span></div>
-          {/* only when it actually moved — an unchanged weight used to read as "− 0" */}
           {!!delta && (
             <span className="small row" style={{ gap: 2, fontWeight: 500, color: bwDeltaColor(delta, bw.w) }}>
               <Icon name={delta > 0 ? 'arrowUp' : 'arrowDown'} style={{ fontSize: 'var(--fs-caption)' }} />
@@ -296,18 +271,12 @@ export default function Home() {
             <span>{t('Goal')} {fmtNum(S.targetW)} {S.unit} · {Math.abs(S.targetW - bw.w) < 0.05 ? t('reached!') : t(S.targetW > bw.w ? '{0} to gain' : '{0} to lose', fmtNum(Math.abs(S.targetW - bw.w)) + ' ' + S.unit)}</span>
           </div>
         )}
-        <div className="chart" style={{ marginTop: 8 }}><LineChart points={bwPoints} h={130} unit={S.unit} goal={S.targetW} /></div>
-        {/* the weekly rate and, with one set, how it sits in its corridor (#759) */}
-        <WeightRate S={S} />
-        {/* every weigh-in, week by week with its average (Discord 'Weight') */}
-        <div className="row between" style={{ marginTop: 4 }}>
+        <div className="row between" style={{ marginTop: 6 }}>
           <Button size="sm" variant="ghost" icon="target" className="bw-goal" style={S.targetW ? { color: 'var(--gold-ink)' } : undefined} onClick={goalSheet}>{S.targetW ? fmtNum(S.targetW) : t('Goal')}</Button>
           <Button size="sm" variant="ghost" trailingIcon="chevronRight" data-tour="home-weighins" onClick={weighInsSheet}>{t('All weigh-ins')}</Button>
         </div>
       </> : <>
-        <div className="muted small">{S.weighIn === false
-          ? t('No weigh-ins yet. Log your weight to start the curve.')
-          : t("No weigh-ins yet. Log your weight to start the curve (we also ask before every workout).")}</div>
+        <div className="muted small">{t('No weigh-ins yet. Log your weight to start the curve.')}</div>
         <Button size="sm" variant="ghost" icon="target" className="bw-goal" style={{ marginTop: 6, ...(S.targetW ? { color: 'var(--gold-ink)' } : {}) }} onClick={goalSheet}>{S.targetW ? fmtNum(S.targetW) : t('Goal')}</Button>
       </>}
     </div>}

@@ -2,7 +2,7 @@
   "appId": "io.github.rahulbongu.mygym",
   "appName": "My Gym",
   "webDir": "dist",
-  "backgroundColor": "#FAF6F0",
+  "backgroundColor": "#F3F5F9",
   "android": {
     "allowMixedContent": false
   },
@@ -14,7 +14,7 @@
       "launchShowDuration": 8000,
       "launchAutoHide": true,
       "launchFadeOutDuration": 180,
-      "backgroundColor": "#FAF6F0",
+      "backgroundColor": "#F3F5F9",
       "showSpinner": false
     }
   }

@@ -5714,7 +5714,6 @@ export default {
   "Your own code for this set": "Tavo paties kodas šiai serijai",
   "openGym dark": "openGym tamsi",
   "openGym green": "openGym žalia",
-  "My Gym coral": "My Gym koralinė",
   // --- sub-connect-146: Use your subscription (Claude, ChatGPT, Gemini connectors) ---
   "A model on your network": "Modelis jūsų tinkle",
   "A paid ChatGPT plan, on the web. Business and Enterprise workspaces decide whether members may add their own.": "Mokamas ChatGPT planas, naršyklėje. Business ir Enterprise darbo erdvėse pati erdvė sprendžia, ar nariai gali pridėti savo.",
@@ -5894,4 +5893,5 @@ export default {
   "Preview on": "Peržiūra",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "šiek tiek trumpiau",
+  "My Gym indigo": "My Gym indigo",
 }

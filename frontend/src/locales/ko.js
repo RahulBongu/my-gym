@@ -5718,7 +5718,6 @@ export default {
   "Your own code for this set": "이 세트에 대한 나만의 표시",
   "openGym dark": "openGym 다크",
   "openGym green": "openGym 그린",
-  "My Gym coral": "My Gym 코랄",
   // --- sub-connect-146: Use your subscription (Claude, ChatGPT, Gemini connectors) ---
   "A model on your network": "내 네트워크의 모델",
   "A paid ChatGPT plan, on the web. Business and Enterprise workspaces decide whether members may add their own.": "웹에서 쓰는 유료 ChatGPT 플랜. Business와 Enterprise 워크스페이스에서는 구성원이 직접 추가할 수 있을지 워크스페이스가 정해요.",
@@ -5898,4 +5897,5 @@ export default {
   "Preview on": "미리 볼 화면",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "조금 짧게",
+  "My Gym indigo": "My Gym 인디고",
 }

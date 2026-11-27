@@ -5660,7 +5660,6 @@ export default {
   "Your own code for this set": "Din egen kode til dette sæt",
   "openGym dark": "openGym mørk",
   "openGym green": "openGym grøn",
-  "My Gym coral": "My Gym koral",
   "A model on your network": "En model på dit netværk",
   "A paid ChatGPT plan, on the web. Business and Enterprise workspaces decide whether members may add their own.": "Et betalt ChatGPT-abonnement, på nettet. Business- og Enterprise-arbejdsområder bestemmer, om medlemmer må tilføje deres egne.",
   "Add openGym to the assistant app you already pay for": "Tilføj openGym til den assistent-app, du allerede betaler for",
@@ -5838,4 +5837,5 @@ export default {
   "Preview on": "Forhåndsvisning på",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "lidt kortere",
+  "My Gym indigo": "My Gym indigo",
 }

@@ -5684,7 +5684,6 @@ export default {
   "Your own code for this set": "Tvůj vlastní kód pro tuhle sérii",
   "openGym dark": "Tmavá openGym",
   "openGym green": "Zelená openGym",
-  "My Gym coral": "Korálová My Gym",
   // --- sub-connect-146: Use your subscription (Claude, ChatGPT, Gemini connectors) ---
   "A model on your network": "Model ve tvé síti",
   "A paid ChatGPT plan, on the web. Business and Enterprise workspaces decide whether members may add their own.": "Placený plán ChatGPT, na webu. V prostorech Business a Enterprise rozhoduje prostor, jestli si členové můžou přidat vlastní.",
@@ -5864,4 +5863,5 @@ export default {
   "Preview on": "Náhled na",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "kratší",
+  "My Gym indigo": "Indigová My Gym",
 }

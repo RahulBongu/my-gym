@@ -144,7 +144,7 @@ function applyPrefs(theme, accent) {
   de.dataset.theme = resolveTheme(theme)
   applyAccent(de, accent, de.dataset.theme)
   const meta = document.querySelector('meta[name="theme-color"]')
-  if (meta) meta.content = de.dataset.theme === 'light' ? '#faf6f0' : '#161210'
+  if (meta) meta.content = de.dataset.theme === 'light' ? '#f3f5f9' : '#0b0f17'
   if (MOBILE) { setSystemBarsLight(de.dataset.theme === 'light'); setSystemAccent(accent) }
 }
 

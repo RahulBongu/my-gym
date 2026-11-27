@@ -5721,7 +5721,6 @@ export default {
   "Your own code for this set": "A saját kódod ehhez a sorozathoz",
   "openGym dark": "openGym sötét",
   "openGym green": "openGym zöld",
-  "My Gym coral": "My Gym korall",
   // --- sub-connect-146: Use your subscription (Claude, ChatGPT, Gemini connectors) ---
   "A model on your network": "Egy modell a saját hálózatodon",
   "A paid ChatGPT plan, on the web. Business and Enterprise workspaces decide whether members may add their own.": "Fizetős ChatGPT-csomag, a weben. Business és Enterprise munkaterületeken a munkaterület dönti el, hogy a tagok hozzáadhatnak-e sajátot.",
@@ -5901,4 +5900,5 @@ export default {
   "Preview on": "Előnézet itt",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "kicsit rövidebben",
+  "My Gym indigo": "My Gym indigó",
 }

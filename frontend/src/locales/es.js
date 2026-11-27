@@ -5718,7 +5718,6 @@ export default {
   "Your own code for this set": "Tu propio código para esta serie",
   "openGym dark": "Oscuro openGym",
   "openGym green": "Verde openGym",
-  "My Gym coral": "Coral My Gym",
   // --- sub-connect-146: Use your subscription (Claude, ChatGPT, Gemini connectors) ---
   "A model on your network": "Un modelo en tu red",
   "A paid ChatGPT plan, on the web. Business and Enterprise workspaces decide whether members may add their own.": "Un plan de pago de ChatGPT, en la web. En los espacios Business y Enterprise, el espacio decide si los miembros pueden añadir los suyos.",
@@ -5898,4 +5897,5 @@ export default {
   "Preview on": "Vista previa en",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "un poco más corto",
+  "My Gym indigo": "Índigo My Gym",
 }

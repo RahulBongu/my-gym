@@ -21,7 +21,7 @@ final class AccentTheme {
 
     // The same presets as lib/format.js ACCENTS, in that order.
     static final String[] NAMES = { "brand", "lime", "sky", "orange", "violet", "pink", "red", "teal", "gold" };
-    static final int[] COLORS = { 0xd14615, 0x30d158, 0x0a84ff, 0xff9f0a, 0xbf5af2, 0xff375f, 0xff453a, 0x40c8e0, 0xffd60a };
+    static final int[] COLORS = { 0x4f46e5, 0x30d158, 0x0a84ff, 0xff9f0a, 0xbf5af2, 0xff375f, 0xff453a, 0x40c8e0, 0xffd60a };
 
     /** The preset index for a preset key or a '#rrggbb' colour, or -1 for anything else. */
     static int presetFor(String accent) {

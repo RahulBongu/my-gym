@@ -1,5 +1,5 @@
 // @vitest-environment happy-dom
-// 1.4.5+: the default profile uses My Gym burnt coral (#d14615). A profile started from nothing wears it; a
+// 1.4.5+: the default profile uses My Gym electric indigo (#4f46e5). A profile started from nothing wears it; a
 // profile that already exists keeps exactly the accent it had, whichever way its copy reaches the
 // app: the browser's saved copy, the phone's file mirror, a server pull, a sign-in, a backup, a
 // merge with another device, an older app on the other end. The rule is the one weighIn and
@@ -22,17 +22,17 @@ const blank = () => ({ workouts: [], routines: [], bodyweight: [], customEx: [] 
 const KEY = 'gym_state_v1'
 
 describe('the two defaults', () => {
-  it('a new profile gets the brand coral, everything that never picked keeps the old one', () => {
+  it('a new profile gets the brand indigo, everything that never picked keeps the old one', () => {
     expect(NEW_ACCENT).toBe('brand')
     expect(DEFAULT_ACCENT).toBe('lime')
-    expect(ACCENTS.brand).toBe('#d14615')
+    expect(ACCENTS.brand).toBe('#4f46e5')
     expect(ACCENTS.lime).toBe('#30d158')
     expect(DEF.accent).toBe('lime')
   })
-  it('the brand coral comes first in the picker, the old one stays as Classic green', () => {
+  it('the brand indigo comes first in the picker, the old one stays as Classic green', () => {
     expect(Object.keys(ACCENTS)[0]).toBe('brand')
     expect(Object.keys(ACCENTS)[1]).toBe('lime')
-    expect(ACCENT_NAMES.brand).toBe('My Gym coral')
+    expect(ACCENT_NAMES.brand).toBe('My Gym indigo')
     expect(ACCENT_NAMES.lime).toBe('Classic green')
     expect(Object.keys(ACCENT_NAMES)).toEqual(Object.keys(ACCENTS))
     expect(Object.keys(ACCENT_INK)).toEqual(Object.keys(ACCENTS))
@@ -144,15 +144,15 @@ describe('another account on this device', () => {
   })
 })
 
-describe('the brand coral everywhere it is drawn', () => {
-  it('carries pure white ink, passing the 4.5:1 AA text bar on coral buttons', () => {
-    expect(accentPair('brand')).toEqual({ accent: '#d14615', ink: '#ffffff' })
-    expect(contrast('#d14615', '#ffffff')).toBeGreaterThanOrEqual(4.5)
+describe('the brand indigo everywhere it is drawn', () => {
+  it('carries pure white ink, passing the 4.5:1 AA text bar on indigo buttons', () => {
+    expect(accentPair('brand')).toEqual({ accent: '#4f46e5', ink: '#ffffff' })
+    expect(contrast('#4f46e5', '#ffffff')).toBeGreaterThanOrEqual(4.5)
   })
   it('goes to the watches as it is, with its ink', () => {
-    expect(watchAccent({ accent: 'brand' })).toEqual({ accent: '#d14615', onAccent: '#ffffff' })
+    expect(watchAccent({ accent: 'brand' })).toEqual({ accent: '#4f46e5', onAccent: '#ffffff' })
     expect(watchAccent({ accent: 'lime' })).toEqual({ accent: '#30d158', onAccent: '#000000' })
-    expect(garminLook(watchAccent({ accent: 'brand' }))).toMatchObject({ accent: '#d14615', onAccent: '#ffffff' })
+    expect(garminLook(watchAccent({ accent: 'brand' }))).toMatchObject({ accent: '#4f46e5', onAccent: '#ffffff' })
   })
   it('the ink of every preset reads at 3:1 (button text, large) or better on its swatch', () => {
     for (const [k, c] of Object.entries(ACCENTS)) expect(contrast(c, ACCENT_INK[k]), k).toBeGreaterThanOrEqual(3)

@@ -5718,7 +5718,6 @@ export default {
   "Your own code for this set": "इस सेट के लिए आपका अपना कोड",
   "openGym dark": "openGym डार्क",
   "openGym green": "openGym हरा",
-  "My Gym coral": "My Gym कोरल",
   // --- sub-connect-146: Use your subscription (Claude, ChatGPT, Gemini connectors) ---
   "A model on your network": "आपके नेटवर्क पर एक मॉडल",
   "A paid ChatGPT plan, on the web. Business and Enterprise workspaces decide whether members may add their own.": "ChatGPT का कोई पेड प्लान, वेब पर। Business और Enterprise वर्कस्पेस खुद तय करते हैं कि सदस्य अपने कनेक्टर जोड़ सकते हैं या नहीं।",
@@ -5898,4 +5897,5 @@ export default {
   "Preview on": "प्रीव्यू यहां",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "थोड़ा छोटा",
+  "My Gym indigo": "My Gym इंडिगो",
 }

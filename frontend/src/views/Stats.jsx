@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import Kairo from '../components/Kairo.jsx'
 import { scrollToTop } from '../lib/scroll-top.js'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore.js'
@@ -916,10 +915,6 @@ export default function Stats() {
         <button className="iconbtn" onClick={reportSheet} aria-label={t('Performance report')} title={t('Performance report')}><Icon name="note" /></button>
         <button className="iconbtn" data-tour="stats-history" onClick={() => nav('/history')} aria-label={t('History')}><Icon name="history" /></button>
       </div></div>
-
-    <div style={{ marginBottom: 14 }}>
-      <Kairo pose="celebrate" size="sm" message={t('Consistency pays off! Review your volume progression and personal records below.')} tag={t('Kairo Analytics')} />
-    </div>
 
     {/* The page in four parts (redesign 1.4.5, P5), each with its own heading, and a sticky index
         that jumps to them and follows the scroll. It is still one page: every card is where a

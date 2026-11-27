@@ -21,18 +21,18 @@
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
         <item name="android:background">@drawable/splash</item>
-        <!-- Android 12+ draws its own splash first: Warm Alabaster Cream light backdrop. -->
-        <item name="windowSplashScreenBackground">#FFFAF6F0</item>
+        <!-- Android 12+ draws its own splash first: Cool studio light backdrop. -->
+        <item name="windowSplashScreenBackground">#FFF3F5F9</item>
     </style>
 
     <!-- The accent laid over the theme at start and on every change (AccentTheme.java, #980):
          selection handles, the native caret and a native field's highlight. -->
     <style name="Accent.Brand" parent="">
-        <item name="colorAccent">#d14615</item>
-        <item name="colorControlActivated">#d14615</item>
-        <item name="android:colorAccent">#d14615</item>
-        <item name="android:colorControlActivated">#d14615</item>
-        <item name="android:textColorHighlight">#66d14615</item>
+        <item name="colorAccent">#4f46e5</item>
+        <item name="colorControlActivated">#4f46e5</item>
+        <item name="android:colorAccent">#4f46e5</item>
+        <item name="android:colorControlActivated">#4f46e5</item>
+        <item name="android:textColorHighlight">#664f46e5</item>
     </style>
     <style name="Accent.Lime" parent="">
         <item name="colorAccent">#30d158</item>

@@ -64,7 +64,7 @@
 </script>
 <title>My Gym</title>
 <meta name="description" content="Personal gym & body weight tracker">
-<meta name="theme-color" content="#faf6f0">
+<meta name="theme-color" content="#f3f5f9">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -84,7 +84,7 @@
      native splash and the first real screen is the logo loading its plates cleanly in light mode.
      lib/boot.js takes it away the moment the app can draw, so it never adds a wait. -->
 <style>
-  #boot{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:#faf6f0;transition:opacity .22s ease-out}
+  #boot{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:#f3f5f9;transition:opacity .22s ease-out}
   #boot.out{opacity:0;pointer-events:none}
   #boot svg{width:112px;height:auto;overflow:visible}
   #boot rect,#boot ellipse{transform-box:fill-box;transform-origin:center}
@@ -94,17 +94,17 @@
   #boot .in{animation-delay:.22s}
   #boot .outer{animation-delay:.36s}
   #boot .db{animation:boot-rep 1.25s ease-in-out .75s infinite}
-  #boot ellipse{fill:#d14615;opacity:.14;animation:boot-shadow 1.25s ease-in-out .75s infinite}
+  #boot ellipse{fill:#4f46e5;opacity:.14;animation:boot-shadow 1.25s ease-in-out .75s infinite}
   @keyframes boot-bar{from{transform:scaleX(0)}}
   @keyframes boot-plate{from{transform:translateX(-40px);opacity:0}}
   @keyframes boot-plate-r{from{transform:translateX(40px);opacity:0}}
   @keyframes boot-rep{50%{transform:translateY(-26px)}}
   @keyframes boot-shadow{50%{transform:scaleX(.72);opacity:.06}}
   #boot.fail{place-items:center;padding:24px}
-  #boot.fail div{max-width:340px;font:15px/1.4 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:#1e1815;text-align:center}
+  #boot.fail div{max-width:340px;font:15px/1.4 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;color:#0f172a;text-align:center}
   #boot.fail .h{font-size:19px;font-weight:600;margin:0 0 8px}
-  #boot.fail code{display:block;margin:14px 0 18px;padding:10px;border-radius:10px;background:#f3ede3;color:#6e645d;font-size:12px;text-align:left;word-break:break-word;-webkit-user-select:text;user-select:text}
-  #boot.fail button{font:inherit;font-weight:600;color:#ffffff;background:#d14615;border:0;border-radius:99px;min-height:44px;padding:0 28px}
+  #boot.fail code{display:block;margin:14px 0 18px;padding:10px;border-radius:10px;background:#e2e8f0;color:#475569;font-size:12px;text-align:left;word-break:break-word;-webkit-user-select:text;user-select:text}
+  #boot.fail button{font:inherit;font-weight:600;color:#ffffff;background:#4f46e5;border:0;border-radius:99px;min-height:44px;padding:0 28px}
   @media (prefers-reduced-motion:reduce){
     #boot .bar,#boot .pl,#boot .pr,#boot ellipse{animation:none}
     #boot .db{animation:boot-breathe 1.6s ease-in-out infinite}
@@ -114,7 +114,7 @@
 <div id="boot" aria-hidden="true">
   <svg viewBox="80 140 352 250">
     <ellipse cx="256" cy="372" rx="150" ry="9"/>
-    <g class="db" fill="#d14615">
+    <g class="db" fill="#4f46e5">
       <rect class="bar" x="80" y="242" width="352" height="28"/>
       <rect class="pl in" x="131" y="169" width="47" height="174"/>
       <rect class="pr in" x="334" y="169" width="47" height="174"/>

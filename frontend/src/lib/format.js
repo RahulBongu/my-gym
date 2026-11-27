@@ -197,9 +197,9 @@ export const localTZ = () => { try { return Intl.DateTimeFormat().resolvedOption
 
 export const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7)
 // What each accent is called, for a screen reader (Settings' swatches carry no text). The first
-// is the brand's own burnt coral (#d14615), and what a new profile starts on (lib/accent.js NEW_ACCENT).
-export const ACCENT_NAMES = { brand: 'My Gym coral', lime: 'Classic green', sky: 'Blue', orange: 'Orange', violet: 'Purple', pink: 'Pink', red: 'Red', teal: 'Teal', gold: 'Yellow' }
-export const ACCENTS = { brand: '#d14615', lime: '#30d158', sky: '#0a84ff', orange: '#ff9f0a', violet: '#bf5af2', pink: '#ff375f', red: '#ff453a', teal: '#40c8e0', gold: '#ffd60a' }
+// is the brand's own electric indigo (#4f46e5), and what a new profile starts on (lib/accent.js NEW_ACCENT).
+export const ACCENT_NAMES = { brand: 'My Gym indigo', lime: 'Classic green', sky: 'Blue', orange: 'Orange', violet: 'Purple', pink: 'Pink', red: 'Red', teal: 'Teal', gold: 'Yellow' }
+export const ACCENTS = { brand: '#4f46e5', lime: '#30d158', sky: '#0a84ff', orange: '#ff9f0a', violet: '#bf5af2', pink: '#ff375f', red: '#ff453a', teal: '#40c8e0', gold: '#ffd60a' }
 // Text drawn on top of that swatch. Matches the --on-acc values in index.css.
 export const ACCENT_INK = { brand: '#ffffff', lime: '#000000', sky: '#ffffff', orange: '#000000', violet: '#ffffff', pink: '#ffffff', red: '#ffffff', teal: '#000000', gold: '#000000' }
 // Android color int, opaque. JS bitwise ops are signed, so the high bit is cleared back to unsigned.

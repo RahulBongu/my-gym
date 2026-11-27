@@ -5,7 +5,7 @@
 const RECTS = [[80, 242, 352, 28], [80, 199, 36, 114], [131, 169, 47, 174], [334, 169, 47, 174], [396, 199, 36, 114]]
 
 /** The mark alone, `height` px high (width follows, 352:174). `color` only for a one-colour use. */
-export function BrandMark({ height = 24, color = 'var(--acc, #d14615)', className, style }) {
+export function BrandMark({ height = 24, color = 'var(--acc, #4f46e5)', className, style }) {
   return (
     <svg className={className} viewBox="80 169 352 174" width={height * 352 / 174} height={height}
       fill={color} aria-hidden="true" focusable="false" style={{ flex: 'none', ...style }}>

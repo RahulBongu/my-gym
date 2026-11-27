@@ -5890,5 +5890,5 @@ export default {
   "Preview on": "預覽位置",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "縮短一點",
-  "My Gym coral": "My Gym 珊瑚橘",
+  "My Gym indigo": "My Gym 靛藍",
 }

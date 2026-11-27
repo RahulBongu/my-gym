@@ -5684,7 +5684,6 @@ export default {
   "Your own code for this set": "کد خودت برای این ست",
   "openGym dark": "تیره openGym",
   "openGym green": "سبز openGym",
-  "My Gym coral": "مرجانی My Gym",
   // --- sub-connect-146: Use your subscription (Claude, ChatGPT, Gemini connectors) ---
   "A model on your network": "مدلی روی شبکه‌ی شما",
   "A paid ChatGPT plan, on the web. Business and Enterprise workspaces decide whether members may add their own.": "یک اشتراک پولی ChatGPT، روی وب. در فضاهای کاری Business و Enterprise خود فضای کاری تصمیم می‌گیرد که اعضا می‌توانند رابط خودشان را اضافه کنند یا نه.",
@@ -5864,4 +5863,5 @@ export default {
   "Preview on": "پیش‌نمایش روی",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "کمی کوتاه‌تر",
+  "My Gym indigo": "نیلی My Gym",
 }

@@ -229,7 +229,7 @@ export function buildWidgetSnapshot (S, { today = todayISO() } = {}) {
     weekFrom,
     weekUntil: shift(weekFrom, 7),
     unit: st.unit === 'lb' ? 'lb' : 'kg',
-    accent: pair?.accent || '#d14615',
+    accent: pair?.accent || '#4f46e5',
     ink: pair?.ink || '#ffffff',
     days,
     week: { done: week.done || 0, planned: week.planned || 0 },

@@ -1,5 +1,4 @@
 import { laddersSheet } from '../components/Ladders.jsx'
-import Kairo from '../components/Kairo.jsx'
 import { useDeferredValue, useMemo, useRef, useState } from 'react'
 import { useUI } from '../store/useUI.js'
 import { useNavigate } from 'react-router-dom'
@@ -108,9 +107,6 @@ export default function Library() {
         ? tn('{1} animated exercises + 1 of your own', '{1} animated exercises + {0} of your own', ownCount, EXDB.length)
         : t('{0} exercises with animations', EXDB.length)}</div>
     </div>
-    {!narrowed && <div style={{ margin: '4px 0 12px' }}>
-      <Kairo pose="focus" size="sm" message={t('Filter by muscle group to balance your weekly training volume!')} tag="Kairo Coach" />
-    </div>}
     <div className="search-row" data-tour="lib-search" style={{ marginBottom: 10 }}><div className={'search' + (narrowed ? ' has-count' : '') + (q ? ' has-clear' : '')}><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
       <input className="input" placeholder={t('Search…')} value={q} onChange={e => { setQ(e.target.value); setShown(40) }} />
       {narrowed && <span className="search-count" role="status" aria-label={exCount(f.length)}>{fmtNum(f.length)}</span>}
@@ -145,8 +141,8 @@ export default function Library() {
         <div className="grow"><div className="tt">{t('Create your own exercise')}</div><div className="ss">{t('name + body part, and a photo or video if you like')}</div></div><Icon name="plus" className="chev" />
       </div>
       {f.slice(0, shown).map(row)}
-      {f.length === 0 && !similar.length && <div className="empty" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-        <Kairo pose="empty" size="md" message={t('No matching exercises found. Try adjusting your filters or create a custom movement!')} tag="Kairo Guide" />
+      {f.length === 0 && !similar.length && <div className="empty">
+        <div className="muted small">{t('No match')}</div>
       </div>}
       {f.length <= shown && <GymHiddenLine count={gymHidden} profile={profile} onShowAll={() => setShowAll(true)} />}
       {similar.length > 0 && <h4 className="sec similar-label">{f.length ? t('Similar exercises') : t('No exact match. These come close:')}</h4>}

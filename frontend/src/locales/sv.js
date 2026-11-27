@@ -5944,5 +5944,5 @@ export default {
   "Preview on": "Förhandsvisa på",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "kortare",
-  "My Gym coral": "My Gym korall",
+  "My Gym indigo": "My Gym indigo",
 }

@@ -25,10 +25,10 @@ import ch.duartesantos.opengym.wear.WatchSettings
  * Always On (ambient): no lit fills, only their outlines, the text a little dimmer, nothing moves.
  */
 object Og {
-    /** The brand's burnt coral (#f06d3b on OLED watch), until the phone has said which one it wears. */
-    val Green = Color(0xFFF06D3B)
-    /** High-contrast dark ink on warm coral. */
-    val OnGreen = Color(0xFF0C0E12)
+    /** The brand's electric blue/indigo (#60a5fa on OLED watch), until the phone has said which one it wears. */
+    val Green = Color(0xFF60A5FA)
+    /** High-contrast dark ink on electric blue. */
+    val OnGreen = Color(0xFF0F172A)
     val Orange = Color(0xFFFF9F0A)
     val Red = Color(0xFFFF453A)
     val Yellow = Color(0xFFFFD60A)

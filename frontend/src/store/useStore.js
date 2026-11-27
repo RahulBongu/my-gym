@@ -29,6 +29,7 @@ import { loadCoachDevice, saveCoachDevice, coachDeviceSettings } from '../lib/co
 import { initCoachSchedule } from '../lib/coach-schedule.js'
 import { RTL_LANGS } from '../lib/i18n-core.js'
 import { DEFAULT_TEMPLATE_ID } from '../lib/structuralBalanceTemplates.js'
+import { buildStarterPlan } from '../lib/starter.js'
 
 import { WC_DEFAULT } from '../lib/workout-controls.js'
 import { sanitizeAccent, NEW_ACCENT } from '../lib/accent.js'
@@ -367,9 +368,21 @@ export function freshState() {
     community: false,
     seasonal: false,
   }
-  // Warm Burnt Coral brand palette default. DEF stays 'lime' for legacy profile migration.
+  // Electric Indigo brand palette default. DEF stays 'lime' for legacy profile migration.
   s.accent = NEW_ACCENT
   return s
+}
+
+function seedDefaultStarter(s) {
+  if ((s.routines || []).length || (s.workouts || []).length) return false
+  const plan = buildStarterPlan('ppl')
+  if (!plan) return false
+  s.routines = plan.routines
+  s.week = { ...DEF.week }
+  for (const { day, routineId } of plan.schedule) {
+    s.week[day] = [...(s.week[day] || []), routineId]
+  }
+  return true
 }
 
 // A copy that starts over on this device: Reset everything, or another account signing in here.
@@ -1770,6 +1783,9 @@ export const useStore = create((set, get) => {
       set({})
       if (v) setSync({ auth: false, offline: false, lastError: null })
     },
+    seedStarterIfEmpty() {
+      if (!hasData(get().S)) get().update(s => { seedDefaultStarter(s) }, false)
+    },
 
     // Public config from /api/config (invite_only, allow_guest). null until the first successful
     // fetch — the login screen and boot both read it, so it is fetched once and cached here
@@ -2078,9 +2094,10 @@ export const useStore = create((set, get) => {
 
     // Mobile-only ("connect to my server" onboarding, see App.jsx's needsMobileOnboarding).
     // Picking local — even before there's any data — persists the choice so onboarding never
-    // asks again.
+    // asks again, and pre-loads the 3-day starter split so the user starts with real exercises.
     async chooseLocalMode() {
       await chooseLocal()
+      get().update(s => { seedDefaultStarter(s) }, false)
       set({ needsMobileOnboarding: false, permSteps: true })
     },
     // Redeems the pairing code shown in the browser (Settings → "Pair the mobile app") and
