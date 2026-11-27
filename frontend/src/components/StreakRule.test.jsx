@@ -51,8 +51,8 @@ describe('Settings: the rule sheet', () => {
 })
 
 describe('a new profile picks once', () => {
-  it('freshState asks, existing profiles do not', () => {
-    expect(freshState().streakRuleAsk).toBe(true)
+  it('freshState keeps onboarding minimal by not nagging with streak rules', () => {
+    expect(freshState().streakRuleAsk).toBe(false)
     expect(freshState().streakRule).toBeUndefined()
     expect(DEF.streakRuleAsk).toBeUndefined()
   })

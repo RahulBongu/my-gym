@@ -236,21 +236,21 @@ describe('cardPalette', () => {
   it('is the app’s dark or light look with the accent, darker accent text on light paper', () => {
     const dark = cardPalette('dark', '#30d158')
     const light = cardPalette('light', '#30d158')
-    expect(dark).toMatchObject({ bg: '#000000', surface: '#1c1c1e', label: '#ffffff', acc: '#30d158', accText: '#30d158' })
-    expect(light).toMatchObject({ bg: '#f2f2f7', surface: '#ffffff', label: '#000000', acc: '#30d158' })
+    expect(dark).toMatchObject({ bg: '#161210', surface: '#201a17', label: '#faf6f0', acc: '#30d158', accText: '#30d158' })
+    expect(light).toMatchObject({ bg: '#faf6f0', surface: '#ffffff', label: '#1e1815', acc: '#30d158' })
     expect(light.accText).not.toBe('#30d158')
     expect(parseColor(light.accText)[1]).toBeLessThan(parseColor('#30d158')[1])
-    // no usable accent: the brand's green (1.4.5)
-    expect(cardPalette('dark', 'nonsense').acc).toBe('#a3e635')
+    // no usable accent: the brand's burnt coral
+    expect(cardPalette('dark', 'nonsense').acc).toBe('#d14615')
   })
-  it('accent text on light paper reads at 4.5:1, also for the brand’s light green', () => {
+  it('accent text on light paper reads at 4.5:1, also for the brand’s burnt coral', () => {
     const ratio = (a, b) => {
       const L = c => { const [r, g, bl] = parseColor(c).slice(0, 3).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4 }); return 0.2126 * r + 0.7152 * g + 0.0722 * bl }
       const [x, y] = [L(a), L(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05)
     }
-    for (const acc of ['#a3e635', '#84cc16', '#30d158', '#ffd60a', '#0a84ff']) {
+    for (const acc of ['#d14615', '#eb5e28', '#30d158', '#ffd60a', '#0a84ff']) {
       const { accText } = cardPalette('light', acc)
-      for (const bg of ['#f2f2f7', '#ffffff']) expect(ratio(accText, bg), acc).toBeGreaterThanOrEqual(4.5)
+      for (const bg of ['#faf6f0', '#ffffff']) expect(ratio(accText, bg), acc).toBeGreaterThanOrEqual(4.5)
     }
   })
 })

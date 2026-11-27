@@ -61,14 +61,14 @@ export default function Kairo({
 
             {/* Jacket gradient */}
             <linearGradient id="kairo-jacket" x1="30" y1="65" x2="70" y2="95" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#232A25" />
-              <stop offset="100%" stopColor="#141916" />
+              <stop offset="0%" stopColor="#2B211C" />
+              <stop offset="100%" stopColor="#1E1815" />
             </linearGradient>
 
             {/* Glow effect */}
             <radialGradient id="kairo-glow-grad" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="var(--acc, #C7F36B)" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="var(--acc, #C7F36B)" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--acc, #D14615)" stopOpacity="0.28" />
+              <stop offset="100%" stopColor="var(--acc, #D14615)" stopOpacity="0" />
             </radialGradient>
           </defs>
 
@@ -98,7 +98,7 @@ export default function Kairo({
             {/* Left Ear Tip (Dark) */}
             <path
               d="M18 16 L22 24 L19 22 Z"
-              fill="#181E1A"
+              fill="#261E19"
             />
             {/* Left Inner Ear (Fluff) */}
             <path
@@ -114,7 +114,7 @@ export default function Kairo({
             {/* Right Ear Tip (Dark) */}
             <path
               d="M82 16 L78 24 L81 22 Z"
-              fill="#181E1A"
+              fill="#261E19"
             />
             {/* Right Inner Ear (Fluff) */}
             <path
@@ -140,9 +140,9 @@ export default function Kairo({
             <g id="kairo-sweatband">
               <path
                 d="M29 36 C34 33 42 32 50 32 C58 32 66 33 71 36 L70 41 C65 38 58 37 50 37 C42 37 35 38 30 41 Z"
-                fill="var(--acc, #C7F36B)"
+                fill="var(--acc, #D14615)"
               />
-              <circle cx="50" cy="36.5" r="2" fill="#141916" />
+              <circle cx="50" cy="36.5" r="2" fill="#1E1815" />
             </g>
           )}
 
@@ -219,29 +219,29 @@ export default function Kairo({
               fill="url(#kairo-jacket)"
             />
 
-            {/* Acid Lime Collar Trim */}
+            {/* Coral Collar Trim */}
             <path
               d="M34 66 L42 74 L50 67 L58 74 L66 66"
-              stroke="var(--acc, #C7F36B)"
+              stroke="var(--acc, #D14615)"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
 
-            {/* Neon Zipper Track */}
+            {/* Coral Zipper Track */}
             <line
               x1="50"
               y1="67"
               x2="50"
               y2="95"
-              stroke="var(--acc, #C7F36B)"
+              stroke="var(--acc, #D14615)"
               strokeWidth="1.8"
               strokeDasharray="2 1.5"
             />
 
             {/* Jacket Shoulder Stripes */}
-            <line x1="28" y1="74" x2="33" y2="84" stroke="var(--acc, #C7F36B)" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="72" y1="74" x2="67" y2="84" stroke="var(--acc, #C7F36B)" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="28" y1="74" x2="33" y2="84" stroke="var(--acc, #D14615)" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="72" y1="74" x2="67" y2="84" stroke="var(--acc, #D14615)" strokeWidth="1.5" strokeLinecap="round" />
           </g>
 
           {/* Pose Overlays / Accessories */}
@@ -253,18 +253,18 @@ export default function Kairo({
               <path d="M73 59 L75 56" stroke="#2B1A0E" strokeWidth="1" strokeLinecap="round" />
               <path d="M75 58 L78 56" stroke="#2B1A0E" strokeWidth="1" strokeLinecap="round" />
               {/* Little wave lines */}
-              <path d="M82 56 Q85 59 82 62" stroke="var(--acc, #C7F36B)" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M82 56 Q85 59 82 62" stroke="var(--acc, #D14615)" strokeWidth="1.5" strokeLinecap="round" />
             </g>
           )}
 
           {/* ENCOURAGE POSE: Fist Pump with Spark */}
           {pose === 'encourage' && (
             <g id="pose-encourage">
-              <circle cx="76" cy="55" r="6" fill="url(#kairo-fur)" stroke="var(--acc, #C7F36B)" strokeWidth="1.5" />
+              <circle cx="76" cy="55" r="6" fill="url(#kairo-fur)" stroke="var(--acc, #D14615)" strokeWidth="1.5" />
               {/* Energy Sparks */}
-              <path d="M76 43 L76 46" stroke="var(--acc, #C7F36B)" strokeWidth="2" strokeLinecap="round" />
-              <path d="M83 48 L80 50" stroke="var(--acc, #C7F36B)" strokeWidth="2" strokeLinecap="round" />
-              <path d="M85 56 L82 56" stroke="var(--acc, #C7F36B)" strokeWidth="2" strokeLinecap="round" />
+              <path d="M76 43 L76 46" stroke="var(--acc, #D14615)" strokeWidth="2" strokeLinecap="round" />
+              <path d="M83 48 L80 50" stroke="var(--acc, #D14615)" strokeWidth="2" strokeLinecap="round" />
+              <path d="M85 56 L82 56" stroke="var(--acc, #D14615)" strokeWidth="2" strokeLinecap="round" />
             </g>
           )}
 
@@ -282,8 +282,8 @@ export default function Kairo({
                 strokeWidth="1"
               />
               {/* Confetti dots */}
-              <circle cx="36" cy="18" r="1.5" fill="var(--acc, #C7F36B)" />
-              <circle cx="64" cy="18" r="1.5" fill="var(--acc, #C7F36B)" />
+              <circle cx="36" cy="18" r="1.5" fill="var(--acc, #D14615)" />
+              <circle cx="64" cy="18" r="1.5" fill="var(--acc, #D14615)" />
               <circle cx="30" cy="26" r="1" fill="#F59E0B" />
               <circle cx="70" cy="26" r="1" fill="#38BDF8" />
             </g>
@@ -309,18 +309,18 @@ export default function Kairo({
           {/* TIMER POSE: Holding Stopwatch */}
           {pose === 'timer' && (
             <g id="pose-timer">
-              <circle cx="74" cy="68" r="8" fill="#141916" stroke="var(--acc, #C7F36B)" strokeWidth="1.8" />
-              <circle cx="74" cy="68" r="5" fill="#202922" />
-              <line x1="74" y1="68" x2="74" y2="65" stroke="var(--acc, #C7F36B)" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="74" y1="68" x2="77" y2="68" stroke="var(--acc, #C7F36B)" strokeWidth="1.2" strokeLinecap="round" />
-              <rect x="73" y="58" width="2" height="2" fill="var(--acc, #C7F36B)" />
+              <circle cx="74" cy="68" r="8" fill="#1E1815" stroke="var(--acc, #D14615)" strokeWidth="1.8" />
+              <circle cx="74" cy="68" r="5" fill="#382B25" />
+              <line x1="74" y1="68" x2="74" y2="65" stroke="var(--acc, #D14615)" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="74" y1="68" x2="77" y2="68" stroke="var(--acc, #D14615)" strokeWidth="1.2" strokeLinecap="round" />
+              <rect x="73" y="58" width="2" height="2" fill="var(--acc, #D14615)" />
             </g>
           )}
 
           {/* EMPTY POSE: Holding Clipboard Guide */}
           {pose === 'empty' && (
             <g id="pose-empty">
-              <rect x="68" y="62" width="12" height="16" rx="2" fill="#202922" stroke="var(--acc, #C7F36B)" strokeWidth="1.2" />
+              <rect x="68" y="62" width="12" height="16" rx="2" fill="#382B25" stroke="var(--acc, #D14615)" strokeWidth="1.2" />
               <rect x="71" y="60" width="6" height="3" rx="1" fill="#71717A" />
               <line x1="71" y1="67" x2="77" y2="67" stroke="#A1A1AA" strokeWidth="1" />
               <line x1="71" y1="71" x2="77" y2="71" stroke="#A1A1AA" strokeWidth="1" />

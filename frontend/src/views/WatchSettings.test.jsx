@@ -35,13 +35,17 @@ beforeEach(() => { localStorage.clear(); mocks.health = { on: false }; mocks.lin
 
 describe('Settings → Apple Watch', () => {
   it('shows Apple Health as the phone has it, and leads to its switch', async () => {
-    const el = await mount()
-    expect(row(el, 'Apple Health').querySelector('.lrow-v').textContent).toBe('Off')
-    expect(el.textContent).toContain('Turn on Apple Health and the watch measures your heart rate for every set.')
-    expect(row(el, 'Apple Health').querySelector('[role="switch"]')).toBeNull()
-    await act(async () => { row(el, 'Apple Health').click() })
-    expect(where.pathname).toBe('/settings/apple-health')
-    expect(where.state).toEqual({ find: 'Write to Apple Health' })
+    const S = useStore.getState().S
+    useStore.setState({ S: { ...S, modules: { ...(S.modules || {}), health: true } } })
+    try {
+      const el = await mount()
+      expect(row(el, 'Apple Health').querySelector('.lrow-v').textContent).toBe('Off')
+      expect(el.textContent).toContain('Turn on Apple Health and the watch measures your heart rate for every set.')
+      expect(row(el, 'Apple Health').querySelector('[role="switch"]')).toBeNull()
+      await act(async () => { row(el, 'Apple Health').click() })
+      expect(where.pathname).toBe('/settings/apple-health')
+      expect(where.state).toEqual({ find: 'Write to Apple Health' })
+    } finally { useStore.setState({ S }) }
   })
 
   // CodeRabbit on #1109: with the Health module off, Apple Health's page is not there (Settings sends

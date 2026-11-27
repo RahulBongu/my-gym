@@ -18,26 +18,26 @@
 
 /* ---------------------------------------------------------------- tokens -- */
 :root {
-  /* surfaces — dark is the default (My Gym athletic obsidian palette) */
-  --bg:        #0D110F;
-  --bg-el:     #111613;   /* elevated backdrop (sheets, bars) */
-  --surface:   #151B17;   /* card / grouped-list fill */
-  --surface-2: #202922;   /* pressed + nested fill */
-  --surface-3: #2D3930;   /* controls (segmented track, switch off) */
-  --surface-raised: #26322A;
-  --raised-line: rgba(199,243,107,.12);
-  --border-card: #232B25;
+  /* surfaces — Warm Deep Espresso dark palette */
+  --bg:        #161210;
+  --bg-el:     #1B1614;   /* elevated backdrop (sheets, bars) */
+  --surface:   #211B18;   /* card / grouped-list fill */
+  --surface-2: #2C2420;   /* pressed + nested fill */
+  --surface-3: #382E29;   /* controls (segmented track, switch off) */
+  --surface-raised: #2E2521;
+  --raised-line: rgba(240,109,59,.14);
+  --border-card: #332924;
 
   /* text */
-  --label:     #ffffff;
-  --label-2:   rgba(235,235,245,.60);
-  --label-3:   rgba(235,235,245,.32);
-  --label-4:   rgba(235,235,245,.18);
-  --label-dim: rgba(235,235,245,.55);   /* .50 was 4.1:1 on a dialog's #2c2c2e; .55 is 4.7:1 there */
+  --label:     #FAF6F0;
+  --label-2:   rgba(250,246,240,.66);
+  --label-3:   rgba(250,246,240,.34);
+  --label-4:   rgba(250,246,240,.18);
+  --label-dim: rgba(250,246,240,.58);   /* .50 was 4.1:1 on a dialog's #2c2c2e; .55 is 4.7:1 there */
 
   /* lines */
-  --sep:       rgba(84,84,88,.60);
-  --sep-op:    rgba(84,84,88,.34);   /* for edges sitting over blur */
+  --sep:       rgba(94,82,76,.62);
+  --sep-op:    rgba(94,82,76,.36);   /* for edges sitting over blur */
   --hair:      .5px;
 
   /* system palette (iOS dark values) */
@@ -45,10 +45,10 @@
   --yellow:#ffd60a; --teal:#40c8e0; --indigo:#5e5ce6; --pink:#ff375f;
   --purple:#bf5af2; --mint:#63e6e2; --brown:#ac8e68; --grey:#8e8e93;
 
-  /* accent (per-account, synced) */
-  --acc:  var(--green);
-  --acc-2:#248a3d;
-  --on-acc:#000000;
+  /* accent (per-account, synced — warm coral default) */
+  --acc:  #f06d3b;
+  --acc-2:#d14615;
+  --on-acc:#0c0e12;
   --acc-soft: color-mix(in srgb, var(--acc) 16%, transparent);
   --acc-line: color-mix(in srgb, var(--acc) 38%, transparent);
   /* The accent as text, an icon or a focus ring: the accent itself in the dark theme. In the light
@@ -58,7 +58,7 @@
   --acc-ink: var(--acc);
 
   /* geometry */
-  --r-sm:8px; --r:12px; --r-lg:16px; --r-xl:22px; --r-card:14px;
+  --r-sm:10px; --r:14px; --r-lg:18px; --r-xl:22px; --r-card:20px;
   --pad:16px;
   --icon-stroke:1.7;
 
@@ -110,34 +110,34 @@
 }
 
 :root[data-theme="light"] {
-  --bg:        #F5F7F2;
-  --bg-el:     #EBF0E7;
-  --surface:   #ffffff;
-  --surface-2: #E4ECE0;
-  --surface-3: #D9E4D5;
-  --surface-raised: #ffffff;
-  --raised-line: rgba(60,60,67,.10);
-  --border-card: #DCE3D9;
+  --bg:        #FAF6F0;
+  --bg-el:     #F3EDE3;
+  --surface:   #FFFFFF;
+  --surface-2: #F3EDE3;
+  --surface-3: #E8DFD2;
+  --surface-raised: #FFFFFF;
+  --raised-line: rgba(30,24,21,.10);
+  --border-card: #EAE2D6;
 
-  --label:     #000000;
-  --label-2:   rgba(60,60,67,.75);
-  --label-3:   rgba(60,60,67,.30);
-  --label-4:   rgba(60,60,67,.16);
+  --label:     #1E1815;
+  --label-2:   rgba(30,24,21,.72);
+  --label-3:   rgba(30,24,21,.36);
+  --label-4:   rgba(30,24,21,.18);
   --label-dim: var(--label-2);
 
-  --sep:       rgba(60,60,67,.29);
-  --sep-op:    rgba(60,60,67,.20);
+  --sep:       rgba(30,24,21,.22);
+  --sep-op:    rgba(30,24,21,.12);
 
   --blue:#007aff; --green:#34c759; --red:#ff3b30; --orange:#ff9500;
   --yellow:#ffcc00; --teal:#30b0c7; --indigo:#5856d6; --pink:#ff2d55;
   --purple:#af52de; --mint:#00c7be; --brown:#a2845e; --grey:#8e8e93;
-  --acc-2:#248a3d;
+  --acc-2:#a73400;
   --on-acc:#ffffff;
 }
 
-/* My Gym acid lime brand accent: #C7F36B (contrast dark #0c0e12 on-acc), light theme #84CC16 with accessible #45691F ink */
-:root[data-accent="brand"] { --acc:#c7f36b; --acc-2:#9fd834; --on-acc:#0c0e12; --knob-ring:rgba(0,0,0,.28); --green:#c7f36b; --on-green:#0c0e12 }
-:root[data-theme="light"][data-accent="brand"] { --acc:#84cc16; --acc-2:#65a30d; --green:#84cc16; --green-ink:#45691f; --win-ink:#45691f }
+/* My Gym Burnt Coral brand accent: dark mode #F06D3B (#0c0e12 on-acc), light mode #D14615 (#ffffff on-acc, #B8380B accessible text ink) */
+:root[data-accent="brand"] { --acc:#f06d3b; --acc-2:#d14615; --on-acc:#0c0e12; --knob-ring:rgba(0,0,0,.28); --green:#30d158; --on-green:#0c0e12 }
+:root[data-theme="light"][data-accent="brand"] { --acc:#d14615; --acc-2:#a73400; --green:#1a7f37; --green-ink:#1a7f37; --win-ink:#1a7f37 }
 /* the other accents: Apple's system colours, so a recolour never looks off-system */
 :root[data-accent="lime"]  { --acc:var(--green);  --acc-2:#248a3d; --on-acc:#000 }
 :root[data-accent="sky"]   { --acc:var(--blue);   --acc-2:#0060df; --on-acc:#fff }
@@ -150,7 +150,7 @@
 /* --acc-ink in the light theme, per preset: 4.5:1 or better on both --bg (#f2f2f7) and white. A
    colour of the user's own gets its --acc-ink inline from lib/accent.js (inkIn), to the same 4.5:1
    in both themes (redesign 1.4.5, P12). */
-:root[data-theme="light"][data-accent="brand"] { --acc-ink:#4a7a0e }
+:root[data-theme="light"][data-accent="brand"] { --acc-ink:#b8380b }
 :root[data-theme="light"][data-accent="lime"]  { --acc-ink:#1a7f37 }
 :root[data-theme="light"][data-accent="sky"]   { --acc-ink:#0062cc }
 :root[data-theme="light"][data-accent="orange"]{ --acc-ink:#a85200 }
@@ -167,7 +167,7 @@
    passes and matches the platform convention. */
 :root[data-theme="light"][data-accent="lime"],
 :root[data-theme="light"][data-accent="teal"]  { --on-acc:#000 }
-:root[data-theme="light"][data-accent="brand"] { --on-acc:#0c0e12 }
+:root[data-theme="light"][data-accent="brand"] { --on-acc:#ffffff }
 :root[data-theme="light"][data-accent="sky"],
 :root[data-theme="light"][data-accent="violet"],
 :root[data-theme="light"][data-accent="pink"],
@@ -191,21 +191,21 @@ input,textarea,[contenteditable]{caret-color:var(--acc-ink)}
     --blue:#5cb8ff; --green:#4ad968; --red:#ff6165; --orange:#ffa056;
     --yellow:#fedf43; --teal:#3bddec; --indigo:#a7aaff; --pink:#ff8ac4;
     --purple:#ea8dff; --mint:#54dfcb; --brown:#dba679; --grey:#aeaeb2;
-    --label-2:rgba(235,235,245,.78); --label-3:rgba(235,235,245,.55); --label-4:rgba(235,235,245,.36);
-    --label-dim:rgba(235,235,245,.66);
-    --sep:rgba(84,84,88,.95); --sep-op:rgba(84,84,88,.8);
+    --label-2:rgba(250,246,240,.84); --label-3:rgba(250,246,240,.60); --label-4:rgba(250,246,240,.40);
+    --label-dim:rgba(250,246,240,.72);
+    --sep:rgba(94,82,76,.95); --sep-op:rgba(94,82,76,.8);
   }
   :root:not([data-theme="light"]){ --on-acc:#000 }
   :root[data-theme="light"]{
     --blue:#1e6ef4; --green:#008932; --red:#e9152d; --orange:#c55300;
     --yellow:#a16a00; --teal:#008198; --indigo:#564ade; --pink:#e7124d;
     --purple:#b02fc2; --mint:#008575; --brown:#956d51; --grey:#6c6c70;
-    --label-2:rgba(60,60,67,.82); --label-3:rgba(60,60,67,.6); --label-4:rgba(60,60,67,.4);
+    --label-2:rgba(30,24,21,.86); --label-3:rgba(30,24,21,.62); --label-4:rgba(30,24,21,.42);
     --label-dim:var(--label-2);
-    --sep:rgba(60,60,67,.6); --sep-op:rgba(60,60,67,.5);
+    --sep:rgba(30,24,21,.56); --sep-op:rgba(30,24,21,.42);
   }
-  /* The brand's green keeps its own shades; its words go one step deeper (7:1 on white). */
-  :root[data-theme="light"][data-accent="brand"]{ --green-ink:#3f6212; --acc-ink:#3f6212; --win-ink:#3f6212 }
+  /* Burnt coral goes one shade deeper in increased contrast mode (7:1 on cream/white). */
+  :root[data-theme="light"][data-accent="brand"]{ --green-ink:#116329; --acc-ink:#8f2702; --win-ink:#116329 }
 }
 
 /* ---------------------------------------------------------------- reset -- */
@@ -501,6 +501,11 @@ h4.sec{
   background:var(--surface);border-radius:var(--r-card);
   padding:16px;margin-bottom:12px;
 }
+:root[data-theme="light"] .card,
+:root[data-theme="light"] .sect-b{
+  border:1px solid var(--border-card);
+  box-shadow:0 2px 10px -2px rgba(30,24,21,.05);
+}
 .card .big{font-size:1.875rem;font-weight:600;letter-spacing:-.026em;line-height:1.1}
 /* A whole card that opens something (check-in, the streak's calendar, the advent card) answers the
    press the way a button does. A scale, not a fill: the seasonal cards bring their own ground. */
@@ -646,13 +651,16 @@ h4.sec{
 /* -------------------------------------------------------------- buttons -- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:7px;width:100%;
-  padding:14px 18px;border-radius:var(--r);font-size:var(--fs-body);font-weight:600;
+  padding:14px 18px;border-radius:999px;font-size:var(--fs-body);font-weight:600;
   letter-spacing:-.012em;background:var(--surface-2);color:var(--label);
   transition:transform var(--fast) var(--ease),background var(--fast),opacity var(--fast);
 }
 .btn .icn{font-size:1.1875rem}
 .btn:active{transform:scale(var(--press-scale))}
-.btn.primary{background:var(--acc);color:var(--on-acc)}
+.btn.primary{
+  background:var(--acc);color:var(--on-acc);
+  box-shadow:0 8px 20px -6px var(--acc);box-shadow:0 8px 20px -6px color-mix(in srgb,var(--acc) 45%,transparent);
+}
 .btn.primary:active{background:var(--acc-2)}
 .btn.tinted{background:var(--acc-soft);color:var(--acc-ink)}
 .btn.danger{background:rgba(255,69,58,0.15);background:color-mix(in srgb,var(--red) 15%,transparent);color:var(--red)}
@@ -680,18 +688,21 @@ h4.sec{
    the WebView recomposites the blurred region on every scroll frame, and on Android that is
    the single most expensive thing on the screen. See @supports below for the no-blur case. */
 #tabbar{
-  position:fixed;inset-inline-start:0;inset-inline-end:0;bottom:0;z-index:50;
+  position:fixed;inset-inline-start:12px;inset-inline-end:12px;bottom:calc(10px + var(--sab));z-index:50;
   display:flex;justify-content:space-around;align-items:flex-end;
-  padding:7px 6px calc(6px + var(--sab));
-  background:var(--bg-el);background:color-mix(in srgb,var(--bg-el) 94%,transparent);
+  padding:7px 8px 8px;
+  --orange-ink:#FFB340;
+  background:#211B18;background:rgba(33,27,24,.94);
   -webkit-backdrop-filter:saturate(180%) blur(10px);backdrop-filter:saturate(180%) blur(10px);
-  border-top:var(--hair) solid var(--sep-op);
+  border:var(--hair) solid rgba(255,255,255,.09);
+  border-radius:28px;
+  box-shadow:0 14px 36px -8px rgba(15,10,8,.42);
 }
-:root[data-theme="light"] #tabbar{background:rgba(249,249,251,.94)}
+:root[data-theme="light"] #tabbar{background:rgba(33,27,24,.94)}
 /* 11px: the minimum text size Apple's HIG gives for iOS (11 pt) */
 #tabbar button{
   flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
-  color:var(--label-2);font-size:var(--fs-caption2);font-weight:500;letter-spacing:.005em;padding-top:3px;
+  color:rgba(250,246,240,.68);font-size:var(--fs-caption2);font-weight:500;letter-spacing:.005em;padding-top:3px;
   transition:color var(--fast);
 }
 /* The inactive tint is semi-transparent, so wherever two strokes cross inside an
@@ -699,15 +710,16 @@ h4.sec{
    the alpha doubled up and the icon read as a stack of loose layers. Carrying the
    fade on the <svg> instead of in the stroke colour flattens the icon first and
    fades it as one shape — and it does that for every icon, not just this one. */
-#tabbar button .icn{font-size:1.5625rem;--icon-stroke:1.65;color:var(--label)}
-#tabbar button.on{color:var(--acc-ink)}
+#tabbar button .icn{font-size:1.5625rem;--icon-stroke:1.65;color:#FAF6F0}
+#tabbar button.on{color:color-mix(in srgb,var(--acc) 58%,#ffffff)}
+@supports not (color: color-mix(in srgb, red 50%, blue)){#tabbar button.on{color:#FF9168}}
 #tabbar button.on .icn{--icon-stroke:2;color:inherit;opacity:1}
 /* A connection problem while the banner is switched off (Settings → Show connection status):
    a dot on the Home tab and on the Settings gear. */
 #tabbar .tab-ic{position:relative;display:inline-flex}
 .tab-dot{
   position:absolute;top:-1px;right:-3px;width:8px;height:8px;border-radius:50%;
-  background:var(--orange);box-shadow:0 0 0 2px var(--bg-el);pointer-events:none;
+  background:var(--orange);box-shadow:0 0 0 2px #211B18;pointer-events:none;
 }
 .iconbtn .tab-dot{top:5px;right:5px;box-shadow:0 0 0 2px var(--bg)}
 #tabbar button.start{margin-top:-24px}
@@ -719,7 +731,7 @@ h4.sec{
 }
 #tabbar button.start:active .cir{transform:scale(.93)}
 #tabbar button.start .cir .icn{font-size:1.625rem;--icon-stroke:2;color:inherit;opacity:1}
-#tabbar button.start span{color:var(--acc-ink);font-weight:600}
+#tabbar button.start span{color:#FAF6F0;font-weight:600}
 #tabbar button.start .tab-time{font-variant-numeric:tabular-nums}
 /* `.cir` is itself a <span>, so the label rules above and below reach it too and
    outrank the `.cir` block — which is how the running state ended up painting an
@@ -727,7 +739,7 @@ h4.sec{
    The disc is orange in either theme, so its glyph is black, not `--on-acc`. */
 #tabbar button.start .cir{color:var(--on-acc)}
 #tabbar button.start.rec .cir{background:var(--orange);color:#000;box-shadow:0 6px 18px -4px var(--orange);box-shadow:0 6px 18px -4px color-mix(in srgb,var(--orange) 55%,transparent)}
-#tabbar button.start.rec span{color:var(--orange-ink)}   /* the running clock is read: #ff9500 was 2.1:1 on the light bar */
+#tabbar button.start.rec span{color:var(--orange-ink)}
 #tabbar button.start.rec .cir::after{
   content:'';position:absolute;inset:0;border-radius:50%;
   border:2px solid var(--orange);animation:ping 1.9s var(--ease) infinite;
@@ -743,8 +755,8 @@ h4.sec{
    never had it, and "reduce transparency" accessibility settings drop it. Those surfaces go
    fully opaque instead. Keep this in sync with the rules above. */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  #tabbar{background:var(--bg-el)}
-  :root[data-theme="light"] #tabbar{background:#f9f9fb}
+  #tabbar{background:#211B18}
+  :root[data-theme="light"] #tabbar{background:#211B18}
   #timer{background:var(--surface-raised)}
   #toast{background:var(--surface-2)}
 }
@@ -755,8 +767,8 @@ h4.sec{
   #tabbar,#timer,#toast,.conn-bar,.whdr.stick,.stats-index,.tr-bulk,.gl-sticky{-webkit-backdrop-filter:none;backdrop-filter:none}
   .pp-pill{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(0,0,0,.78)}
   .tr-bulk{background:var(--bg-el)}
-  #tabbar{background:var(--bg-el)}
-  :root[data-theme="light"] #tabbar{background:#f9f9fb}
+  #tabbar{background:#211B18}
+  :root[data-theme="light"] #tabbar{background:#211B18}
   #timer{background:var(--surface-raised)}
   #toast{background:var(--surface-2)}
   .conn-bar,.whdr.stick,.stats-index,.gl-sticky{background:var(--bg)}
@@ -1776,6 +1788,7 @@ button.whdr-gym{color:var(--acc-ink);cursor:pointer}
    empty cells, which are --label-2 and would fade to ~2.5:1, take --label so they land the same. */
 .setrow.done .stp .val i,.setrow.done .effcell.is-empty{color:var(--label)}
 .setrow.done .n{background:var(--acc);color:var(--on-acc)}
+.setrow .stp:focus-within{background:var(--acc-soft);box-shadow:inset 0 0 0 1.5px var(--acc);border-radius:10px}
 
 /* Swipe on sets (v1.3.11, components/SwipeRow.jsx). The row slides over two panes: Copy at the
    start of the line, Delete at its end, each as wide as the swipe has gone and zero wide at rest.
@@ -2139,14 +2152,14 @@ button.whdr-gym{color:var(--acc-ink);cursor:pointer}
    no tab bar (body.no-tabbar, App.jsx), the bar is docked to the bottom edge; anywhere else it
    sits just above the tab bar. */
 #timer{
-  position:fixed;inset-inline-start:12px;inset-inline-end:12px;bottom:calc(88px + var(--sab));z-index:60;
+  position:fixed;inset-inline-start:12px;inset-inline-end:12px;bottom:calc(94px + var(--sab));z-index:60;
   /* nearly opaque: the set rows underneath were reading through the old 82% and made the
      clock hard to pick out mid-set. The blur stays, so it still sits above the page. */
   background:var(--surface-raised);background:color-mix(in srgb,var(--surface-raised) 97%,transparent);
   -webkit-backdrop-filter:saturate(180%) blur(10px);backdrop-filter:saturate(180%) blur(10px);
   border-radius:var(--r-lg);padding:12px 12px 10px;overflow:hidden;
   display:flex;align-items:center;gap:10px;
-  box-shadow:inset 0 0 0 var(--hair) var(--raised-line),0 12px 34px -8px rgba(0,0,0,.55);
+  box-shadow:inset 0 0 0 var(--hair) var(--raised-line),0 12px 34px -8px rgba(30,24,21,.22);
   animation:slideup var(--med) var(--ease);
 }
 @keyframes slideup{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
@@ -3267,8 +3280,17 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
 /* --- home: today's session row --- */
 .today-row{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
-  margin-top:12px;padding:12px 14px;border-radius:var(--r);background:var(--surface-2);
+  margin-top:12px;padding:13px 14px;border-radius:var(--r);background:var(--surface-2);
   transition:background var(--fast);width:100%;text-align: start;cursor:pointer;
+}
+.today-row .tag.acc{
+  background:var(--acc);color:var(--on-acc);
+  padding:6px 14px;border-radius:999px;font-weight:600;
+}
+.home-glance{display:flex;flex-direction:column}
+@media (min-width:520px){
+  .home-glance{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch}
+  .home-glance>.card{margin-bottom:0;display:flex;flex-direction:column}
 }
 .today-row:active{background:var(--surface-3)}
 /* The small line over a card's or row's title ("Today", "At the gym", "Recovery", "Running now") in
@@ -3322,8 +3344,8 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
   .cols .tiles,.center .tiles{grid-template-columns:1fr 1fr}   /* a 300px dialog has no room for four */
   #tabbar{
     left:50%;right:auto;bottom:16px;transform:translateX(-50%);width:520px;
-    border:var(--hair) solid var(--sep-op);border-radius:var(--r-xl);
-    padding:7px 10px 9px;box-shadow:0 12px 40px -10px rgba(0,0,0,.5);
+    border:var(--hair) solid rgba(255,255,255,.09);border-radius:999px;
+    padding:7px 10px 9px;box-shadow:0 14px 36px -8px rgba(15,10,8,.42);
   }
   #tabbar button.start{margin-top:-26px}
   .sheet{left:50%;right:auto;margin-left:-320px;width:640px;border-radius:var(--r-xl) var(--r-xl) 0 0}
@@ -4646,10 +4668,10 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
 /* The openGym logo (components/BrandLogo.jsx, assets/logo): brand colours whatever the accent, the
    type 700 with tight tracking, the mark 1.07em high with its middle 0.36em over the baseline. */
 .brand-lockup{display:inline-block;font-weight:700;letter-spacing:-.036em;line-height:1.1;white-space:nowrap;unicode-bidi:isolate;direction:ltr}
-.brand-lockup-mark{display:inline-block;height:1.07em;width:calc(1.07em * 352 / 174);vertical-align:-.175em;margin-inline-end:.2em;fill:#a3e635}
-.brand-lockup-open{color:#eef1f6}
-.brand-lockup-gym{color:#a3e635}
-:root[data-theme="light"] .brand-lockup-open{color:#12151b}
+.brand-lockup-mark{display:inline-block;height:1.07em;width:calc(1.07em * 352 / 174);vertical-align:-.175em;margin-inline-end:.2em;fill:var(--acc,#d14615)}
+.brand-lockup-open{color:#FAF6F0}
+.brand-lockup-gym{color:var(--acc,#d14615)}
+:root[data-theme="light"] .brand-lockup-open{color:#1E1815}
 
 /* Add set / Warm-up / Remove: 44px tall, the leading glyph on the card's content edge; wrapped siblings share the same edge */
 .wk-add{min-height:44px;margin-inline-start:-14px}

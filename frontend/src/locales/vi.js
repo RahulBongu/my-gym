@@ -5863,4 +5863,5 @@ export default {
   "Preview on": "Xem trước trên",
   // 1.4.5 UX round, P2: timed holds in the finish summary (next hold is shorter)
   "shorter": "ngắn hơn",
+  "My Gym coral": "San hô My Gym",
 };

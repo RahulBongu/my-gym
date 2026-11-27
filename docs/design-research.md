@@ -2,77 +2,40 @@
 
 ## 1. Executive Summary & Vision
 
-**My Gym** is a self-hosted, privacy-first, athletic fitness companion engineered for rapid workout logging, progressive overload tracking, and deep physiological analytics. Built as a customized derivative of the openGym architecture, My Gym introduces an athletic dark-studio visual identity, Google Stitch MCP-guided ergonomics, and an original anime-inspired training companion named **Kairo**.
+**My Gym** is a self-hosted, privacy-first workout & body-weight tracker engineered for fast, distraction-free logging, progressive overload tracking, and clear analytics. Built atop the **openGym** engine (AGPL-3.0-or-later), My Gym features a Light-first **Warm Editorial Fitness** design system generated with **Google Stitch MCP** (`projects/10906287608289081816`) alongside the supportive mascot **Kairo**.
 
 ---
 
-## 2. Competitive & Modern Fitness UX Research
+## 2. Design Principles & Streamlined Scope
 
-To create a premier training experience, we analyzed interaction paradigms from leading mobile and web workout applications:
+To make My Gym approachable and calm rather than overwhelming:
 
-### 2.1 Hevy & Strong (Active Workout Ergonomics)
-- **Strengths:** 
-  - Rapid tabular set entry (`[SET] [PREV] [KG] [REPS] [✓]`).
-  - Minimal friction: tapping the checkmark advances immediately to the next set.
-  - Floating or persistent countdown rest timer with quick +/- 30s adjustment.
-- **My Gym Adaptation:**
-  - Dedicated tactile steppers for KG and REPS with large minimum 44px tap targets.
-  - Distinct active row visual focus with subtle acid-lime border illumination and container elevation.
-  - Unobtrusive rest timer widget that stays accessible across view transitions without blocking workout logging.
+### 2.1 Uncluttered Daily Focus (`Home.jsx`, `MobileOnboarding.jsx`, `useStore.js`)
+- **Lean Defaults:** New profiles start in **Light mode** with clean core modules active (`body`, `motivation`) while secondary power-user overlays (`effort`, `plates`, `strength`, `videos`, `watch`, `checkin`, `health`, `coach`, `integrations`, `community`, `seasonal`) remain opt-in under *Settings → Modules*.
+- **Focused Home Dashboard:** Displays the Kairo daily cue pill, interactive 7-day plan & **Today** workout hero card, and the at-a-glance Body Weight & Consistency cards. Secondary cards (Recap, Deload cycle banners, Monthly Challenges, Wrapped, Recovery hints, Fasting timer, Streak rules) do not clutter the daily home feed.
+- **Friendly Onboarding:** Features Kairo welcome illustration, optional focus goal chips (`Build muscle`, `Stronger`, `Steady`), and clear primary on-device start (`Let’s go` / `Use on this device`).
 
-### 2.2 Fitbod (Progression & Fatigue Modeling)
-- **Strengths:**
-  - Muscle recovery heatmaps and structural balance feedback.
-  - Clear progression rules (Greyskull LP, linear, double/triple progression).
-- **My Gym Adaptation:**
-  - Preserved openGym's scientific progression engine and muscle recovery algorithms (`src/lib/recovery.js`, `src/lib/progression.js`).
-  - Enhanced visual contrast for muscle targeting and volume distribution.
+### 2.2 Hevy & Strong Active Workout Ergonomics
+- Rapid tabular set entry with `44px+` steppers and focused coral border rings (`box-shadow: inset 0 0 0 1.5px var(--acc)`).
+- Floating rest timer bar above the Deep Espresso bottom dock with quick `-15s / +15s / Skip` controls.
+- Full-fidelity preservation of openGym's progression rules (`src/lib/progression.js`) and fatigue modeling (`src/lib/recovery.js`).
 
-### 2.3 Nike Training Club & Studio Design Systems (Aesthetics & Feel)
-- **Strengths:**
-  - Confident athletic typography: bold condensed headings paired with high-legibility tabular body type.
-  - High-energy accent colors (acid lime, volt yellow) against deep pitch-black / obsidian backdrops.
-- **My Gym Adaptation:**
-  - Adopted deep obsidian (`#0D110F`) as the foundational dark theme canvas, preventing washed-out grey tones.
-  - Card surfaces at `#151B17` and elevated surfaces at `#202922`.
-  - Acid lime (`#C7F36B`) as the primary high-voltage action token, paired with warm amber (`#F59E0B`) for PR milestones and achievement celebratory states.
+### 2.3 Warm Alabaster, Deep Espresso & Burnt Coral Palette
+- Replaced dark obsidian / neon lime defaults with a bright, welcoming studio editorial aesthetic:
+  - **Canvas (`--bg`):** `#FAF6F0` Warm Alabaster Cream
+  - **Cards (`--surface`):** `#FFFFFF` with `1px solid #EAE2D6` hairline borders and subtle elevation
+  - **Floating Navigation (`#tabbar`):** `#211B18` Deep Espresso pill bar anchored cleanly above system insets
+  - **Primary Action Accent (`--acc`):** `#D14615` Burnt Coral with `#FFFFFF` ink (4.57:1 WCAG AA) and `#B8380B` text ink (>5.5:1 WCAG AA)
 
 ---
 
-## 3. Human Factors & Interaction Design Principles
-
-### 3.1 Thumb-Reach & One-Handed Operation
-- In a gym environment, users frequently log sets with one hand while holding equipment or resting between sets.
-- Critical controls (set completion checkmark, rest timer skips, start workout CTA) are anchored within comfortable thumb arcs in bottom and mid-screen zones.
-- Navigation utilizes a bottom tab bar with 5 clear destinations: Home, Workouts, Exercises, Analytics, Profile.
-
-### 3.2 Visual Hierarchy & Contrast
-- Strict WCAG 2.1 AA text contrast compliance:
-  - Dark Mode: Primary text `#F3F6F0` (contrast ratio > 16:1 against `#0D110F`), secondary text `#A5B0A6` (> 7:1).
-  - Light Mode: Primary text `#1A241C` (> 14:1 against `#F5F7F2`), secondary text `#59665C` (> 4.8:1), accessible dark green `#45691F` for light theme accents (> 4.5:1).
-  - High-impact acid lime `#C7F36B` buttons feature high-contrast dark label typography (`#0C0E12`, > 12:1).
-
-### 3.3 Motion & Microinteractions
-- Presses give immediate tactile feedback (scale 0.96–0.98 over 140ms on a cubic-bezier curve).
-- Reduced-motion queries (`@media (prefers-reduced-motion: reduce)`) disable all decorative animations and substitute instant transitions.
-- Mascot animations use lightweight CSS keyframes with static fallbacks.
+## 3. Accessibility & Motion
+- **WCAG 2.1 AA Compliance:** Enforced by automated unit checks (`design-review.test.js`, `a11y-contrast-transparency.test.js`). Includes `prefers-contrast: more` overrides (deeper `#8F2702` ink and stronger `--label-2` / separator alphas) and `prefers-reduced-transparency: reduce` solid fallbacks.
+- **Tactile Press Feedback:** Subtle scale (`0.97` buttons, `0.985` interactive cards) over `140ms`, automatically disabled under `prefers-reduced-motion: reduce`.
 
 ---
 
-## 4. Kairo Mascot Companion System
-
-Inspired by supportive recurring companions, **Kairo** is an athletic fox-like training spirit:
-- **Appearance:** Compact athletic silhouette, angular pointed ears with dark tips, charcoal gym jacket (`#1E2521`), acid-lime zip & trim (`#C7F36B`), warm amber eyes (`#F59E0B`), and vibrant orange-amber fur (`#E06D2B`).
-- **Personality:** Encouraging, focused, never intrusive. Speaks with concise, motivating cues.
-- **Rules of Engagement:**
-  1. *Never obstructs active lifting:* During a workout, Kairo appears only in a compact docked status pill or bottom tip bar.
-  2. *Empathetic error recovery:* Guides users through empty libraries or missed workouts with constructive recovery advice.
-  3. *Celebratory milestones:* Confetti, victory poses, and PR celebrations upon completing sessions.
-
----
-
-## 5. References & Inspirations
-- Apple Human Interface Guidelines (Typography, Modality, Sheet Ergonomics)
-- Material Design 3 (Design Tokens, Color fidelity, Tonal spot containers)
-- WCAG 2.1 AA Specification for Digital Accessibility
-- openGym Architecture (`docs/ARCHITECTURE.md`)
+## 4. References & Artifacts
+- Google Stitch Project: `projects/10906287608289081816` (*Warm Editorial Fitness* design system `assets/155dc6dde9294cffb608bbf70da598b1`)
+- Apple Human Interface Guidelines & WCAG 2.1 AA Accessibility Specification
+- openGym Engine Architecture (`docs/ARCHITECTURE.md`)

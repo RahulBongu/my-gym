@@ -95,7 +95,7 @@ export const DEF = {
   // accent: the old iOS green on purpose. A loaded copy that never picked one (saved before accents,
   // a server document, a backup) keeps the green it always had; a new profile starts on the
   // brand's green instead (freshState, lib/accent.js NEW_ACCENT).
-  theme: 'dark', accent: 'lime', body: 'male', targetW: null,
+  theme: 'light', accent: 'lime', body: 'male', targetW: null,
   // The weekly-rate corridor on the body-weight card (#759, lib/bodyweight.js rateCorridor).
   rateGoal: null,
   bodyweight: [], routines: [], week: {}, dayPlan: {},
@@ -343,16 +343,31 @@ const detectedLang = () => {
 // merged under a saved copy it would claim that every existing profile never chose.
 export function freshState() {
   const s = clone(DEF)
+  s.theme = 'light'
   s.lang = detectedLang()
   s.langAuto = true
   s.weighIn = false
   // Exercise animations: Small (v1.3.11), a thumbnail beside the exercise name that a tap opens,
   // so the first set is on screen without scrolling. DEF stays 'full' for a profile saved before.
   s.gifSize = 'mini'
-  // The streak's freeze rule is asked once on Home (components/StreakRule.jsx). Only the ask is
-  // set here, not a rule: a profile without S.streakRule counts as it always did (lib/streak-rule.js).
-  s.streakRuleAsk = true
-  // The brand's green (1.4.5). DEF stays on the old green, so only a copy made here gets this.
+  s.streakRuleAsk = false
+  s.connLocal = false
+  s.modules = {
+    effort: false,
+    plates: false,
+    strength: false,
+    videos: false,
+    watch: false,
+    checkin: false,
+    body: true,
+    health: false,
+    motivation: true,
+    coach: false,
+    integrations: false,
+    community: false,
+    seasonal: false,
+  }
+  // Warm Burnt Coral brand palette default. DEF stays 'lime' for legacy profile migration.
   s.accent = NEW_ACCENT
   return s
 }

@@ -309,12 +309,12 @@ private fun Stat(n: Int, label: String) {
     }
 }
 
-/** The logo mark (assets/logo/opengym-mark.svg) in brand green, for a screen with nothing else to show. */
+/** The logo mark (assets/logo/opengym-mark.svg) in brand coral, for a screen with nothing else to show. */
 @Composable
 fun LogoMark() {
     androidx.compose.foundation.Canvas(Modifier.size(60.dp, (60f * 174f / 352f).dp)) {
         val s = size.width / 352f
-        val green = androidx.compose.ui.graphics.Color(0xFFA3E635)
+        val green = androidx.compose.ui.graphics.Color(0xFFF06D3B)
         // x, y, width, height on the mark's own 352 x 174 grid: square corners, these exact proportions.
         for (r in arrayOf(floatArrayOf(0f, 73f, 352f, 28f), floatArrayOf(0f, 30f, 36f, 114f), floatArrayOf(51f, 0f, 47f, 174f),
                 floatArrayOf(254f, 0f, 47f, 174f), floatArrayOf(316f, 30f, 36f, 114f))) {

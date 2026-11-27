@@ -7,6 +7,7 @@ import { useUI } from '../store/useUI.js'
 import { openLostAccess } from '../components/LostAccess.jsx'
 import { t } from '../lib/i18n.js'
 import BrandLogo from '../components/BrandLogo.jsx'
+import Kairo from '../components/Kairo.jsx'
 import { Button } from '../components/ui.jsx'
 import { askAddDeviceData } from '../sheets.jsx'
 import { normalizeServerUrl } from '../lib/remote.js'
@@ -177,28 +178,50 @@ export function ConnectSheet({ close, initialUrl = '', again = false }) {
 
 export default function MobileOnboarding() {
   const { chooseLocalMode } = useStore()
+  const [goal, setGoal] = useState('muscle')
   // openGym Offline (lib/build-caps.js): there is no server to connect to, so one way in.
   const offline = useOfflineBuild()
   const head = <>
+    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
+      <Kairo pose="welcome" size="lg" />
+    </div>
     {/* The official lockup (assets/logo), not an icon from the app's set. */}
-    <h1 style={{ margin: '0 0 10px', display: 'flex', justifyContent: 'center' }}><BrandLogo size={36} /></h1>
+    <h1 style={{ margin: '0 0 8px', display: 'flex', justifyContent: 'center' }}><BrandLogo size={36} /></h1>
   </>
-  const wrap = { display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '78vh', textAlign: 'center' }
+  const goals = [
+    { id: 'muscle', label: t('Build muscle') },
+    { id: 'strength', label: t('Get stronger') },
+    { id: 'habit', label: t('Consistency') },
+  ]
+  const wrap = { display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '78vh', textAlign: 'center', gap: 2 }
   return (
     <div className="narrow" style={wrap}>
       {head}
+      <div className="muted" style={{ marginBottom: 20 }}>
+        {offline ? t('openGym Offline has no internet permission. Your training stays on this phone, full stop.') : t('How do you want to use openGym?')}
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 24 }}>
+        {goals.map(g => (
+          <button key={g.id} type="button" onClick={() => setGoal(g.id)}
+            style={{
+              padding: '8px 14px', borderRadius: 999, fontSize: 'var(--fs-footnote)', fontWeight: 600,
+              border: '1px solid ' + (goal === g.id ? 'var(--acc)' : 'var(--border-card, var(--sep-op))'),
+              background: goal === g.id ? 'var(--acc-soft)' : 'var(--surface)',
+              color: goal === g.id ? 'var(--acc-ink)' : 'var(--label-2)',
+              cursor: 'pointer', transition: 'all var(--fast)',
+            }}>{g.label}</button>
+        ))}
+      </div>
       {offline ? <>
-        <div className="muted" style={{ marginBottom: 34 }}>{t('openGym Offline has no internet permission. Your training stays on this phone, full stop.')}</div>
         <Button variant="primary" icon="lock" onClick={() => chooseLocalMode()}>{t('Let’s go')}</Button>
-        <div className="dim small" style={{ marginTop: 26, lineHeight: 1.5 }}>
+        <div className="dim small" style={{ marginTop: 22, lineHeight: 1.5 }}>
           {t('Back it up now and then in Settings, Data & backup. A file on your phone is the only copy there is.')}
         </div>
       </> : <>
-      <div className="muted" style={{ marginBottom: 34 }}>{t('How do you want to use openGym?')}</div>
       <Button variant="primary" icon="lock" onClick={() => chooseLocalMode()}>{t('Use on this device')}</Button>
       <div style={{ height: 10 }} />
       <Button icon="cloud" onClick={() => useUI.getState().openSheet(close => <ConnectSheet close={close} />)}>{t('Connect to my server')}</Button>
-      <div className="dim small" style={{ marginTop: 26, lineHeight: 1.5 }}>
+      <div className="dim small" style={{ marginTop: 22, lineHeight: 1.5 }}>
         {t('Local keeps everything on this phone. Connecting syncs to your own openGym server instead. You can switch later in Settings.')}
       </div>
       <div style={{ height: 18 }} />

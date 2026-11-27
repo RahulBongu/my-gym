@@ -59,15 +59,15 @@ export function cardPalette(style, acc = BRAND.green) {
   const light = style === 'light'
   const a = parseColor(acc) ? acc : BRAND.green
   return light
-    ? { bg: '#f2f2f7', surface: '#ffffff', tile: '#f2f2f7', label: '#000000', label2: '#6c6c70', acc: a, accText: accTextOnLight(a), sep: '#e5e5ea', light: true }
-    : { bg: '#000000', surface: '#1c1c1e', tile: '#2c2c2e', label: '#ffffff', label2: '#98989f', acc: a, accText: a, sep: '#38383a', light: false }
+    ? { bg: '#faf6f0', surface: '#ffffff', tile: '#f3ede3', label: '#1e1815', label2: '#6e645d', acc: a, accText: accTextOnLight(a), sep: '#eae2d6', light: true }
+    : { bg: '#161210', surface: '#201a17', tile: '#2b231f', label: '#faf6f0', label2: '#a89c94', acc: a, accText: a, sep: '#3a302a', light: false }
 }
 
 // The brand mark (assets/logo/opengym-mark.svg) on its own 352×174 grid, centred on 0,0. Square
 // corners and these exact proportions: the logo is not ours to restyle per card.
 const MARK = [[-176, -14, 352, 28], [-176, -57, 36, 114], [-125, -87, 47, 174], [78, -87, 47, 174], [140, -57, 36, 114]]
 export const MARK_ASPECT = 352 / 174
-export const BRAND = { green: '#a3e635', ink: '#0c0e12', light: '#eef1f6', dark: '#12151b' }
+export const BRAND = { green: '#d14615', ink: '#1e1815', light: '#faf6f0', dark: '#161210' }
 
 /** The logo mark, `h` high, its left edge at x, centred on y. */
 export function drawMark(ctx, x, y, h, color = BRAND.green) {

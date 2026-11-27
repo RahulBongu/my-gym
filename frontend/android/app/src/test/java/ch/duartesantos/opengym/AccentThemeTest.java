@@ -15,14 +15,14 @@ public class AccentThemeTest {
     public void ownColourTakesTheClosestPreset() {
         assertEquals(2, AccentTheme.presetFor("#0066ff"));   // a blue: sky
         assertEquals(1, AccentTheme.presetFor("#22cc55"));   // a green: lime
-        assertEquals(0, AccentTheme.presetFor("#B0F040"));   // a light lime: the brand's green
+        assertEquals(0, AccentTheme.presetFor("#D14615"));   // burnt coral: the brand's coral
         assertEquals(8, AccentTheme.presetFor("#FFE000"));   // a yellow: gold, case does not matter
     }
 
     @Test
-    public void theBrandGreenComesFirst() {
+    public void theBrandCoralComesFirst() {
         assertEquals("brand", AccentTheme.NAMES[0]);
-        assertEquals(0xa3e635, AccentTheme.COLORS[0]);
+        assertEquals(0xd14615, AccentTheme.COLORS[0]);
         assertEquals("lime", AccentTheme.NAMES[1]);
     }
 
